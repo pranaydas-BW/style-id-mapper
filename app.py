@@ -217,14 +217,19 @@ def generate_new_style_id(brand, aid, van, iname, size, conn):
 # CORE MAPPING
 # ─────────────────────────────────────────────────────────────────────────────
 
-def map_dataframe(df, conn):
+def map_dataframe(df, conn, progress_bar=None, status_text=None):
     style_ids = []
     key_sizes  = []
     new_cache  = {}
     matched = generated = 0
     cur = conn.cursor()
+    total = len(df)
 
-    for _, row in df.iterrows():
+    for i, (_, row) in enumerate(df.iterrows()):
+        if progress_bar is not None:
+            progress_bar.progress((i + 1) / total)
+        if status_text is not None:
+            status_text.text(f"Processing row {i+1:,} of {total:,}...")
         brand = str(row.get('brand_name', '')).strip()
         aid   = str(row.get('vendor_article_id', '')).strip()
         van   = row.get('vendor_article_name', '')
@@ -335,10 +340,13 @@ if uploaded:
         st.dataframe(df.head(5), use_container_width=True)
 
         if st.button("▶ Map Style IDs", type="primary"):
-            with st.spinner("Mapping... this may take a moment for large files"):
-                conn = get_db()
-                result, matched, generated = map_dataframe(df, conn)
-                conn.close()
+            progress_bar = st.progress(0)
+            status_text = st.empty()
+            conn = get_db()
+            result, matched, generated = map_dataframe(df, conn, progress_bar, status_text)
+            conn.close()
+            progress_bar.progress(1.0)
+            status_text.empty()
 
             st.success(f"Done! **{matched:,}** matched · **{generated}** new Style IDs generated")
 
