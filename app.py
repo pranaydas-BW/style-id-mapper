@@ -342,7 +342,7 @@ if uploaded:
 
             st.success(f"Done! **{matched:,}** matched · **{generated}** new Style IDs generated")
 
-            display_cols = ['bar_code','brand_name','vendor_article_id','size','style_group_id','key_size']
+            display_cols = ['bar_code','brand_name','vendor_article_id','vendor_article_name','item_name','size','style_group_id','key_size']
             display_cols = [c for c in display_cols if c in result.columns]
             st.subheader("Result preview")
             st.dataframe(result[display_cols].head(50), use_container_width=True)
