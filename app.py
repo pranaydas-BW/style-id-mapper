@@ -193,7 +193,7 @@ def generate_new_style_id(brand, aid, van, iname, size, conn):
         design_raw = str(van).strip()
     elif iname and not pd.isna(iname):
         parts = str(iname).split('-')
-        design_raw = parts[4].strip() if len(parts) >= 5 else parts[-2].strip()
+        design_raw = parts[4].strip() if len(parts) >= 5 else (parts[-2].strip() if len(parts) >= 2 else parts[0].strip())
     if not design_raw:
         design_raw = strip_size_from_text(aid, size)
 
