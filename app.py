@@ -281,14 +281,18 @@ def get_style_key(row):
             val = re.sub(r'\s{2,}', ' ', val).strip()
     else:  # inn
         if brand == 'Instinct First' or brand == 'Instinct first':
-            # Key = product_type (from AID before first " - ") + design (INN[4]) + color (INN[5])
-            # AID = "Oversized Tshirt - Black - L" → product_type = "Oversized Tshirt"
-            # INN = "...-Stranger Instinct-Black--L" → design="Stranger Instinct", color="Black"
+            # Key = product_type + design (INN[4]) + color (INN[5])
+            # Product type comes from AID if it has " - " format: "Oversized Tshirt - Black - L"
+            # Or from VAN if AID is short code: "IN-IN-MO-S" → VAN = "Oversized Tshirt -Mountain Brown -S"
             a = nz(aid)
-            # Extract product type: everything before the first " - " or " -"
             pt_match = re.match(r'^(.+?)\s+-\s*', a)
             product_type = pt_match.group(1).strip() if pt_match else ''
-            # Normalise common typos
+            # If AID is short code (IN-XX-XX-X), try VAN for product type
+            if not product_type or len(product_type) <= 6:
+                v = nz(van)
+                pt_van = re.match(r'^(.+?)\s*-\s*', v)
+                product_type = pt_van.group(1).strip() if pt_van else product_type
+            # Normalise typos
             product_type = re.sub(r'Fulsleeve', 'Fullsleeve', product_type, flags=re.I)
             product_type = re.sub(r'Oversized\s+T\s+shirt', 'Oversized Tshirt', product_type, flags=re.I)
             product_type = re.sub(r'Shirts?\b', 'Shirt', product_type, flags=re.I)
@@ -320,19 +324,24 @@ def make_style_id_base(brand, aid, van, iname):
     prefix = brand_prefix(brand)
     parts  = nz(iname).split('-')
 
-    # For Instinct First, label = product_type + design + color from INN
     if brand in ('Instinct First', 'Instinct first'):
         a = nz(aid)
         pt_match = re.match(r'^(.+?)\s+-\s*', a)
         product_type = pt_match.group(1).strip() if pt_match else ''
+        if not product_type or len(product_type) <= 6:
+            v = nz(van)
+            pt_van = re.match(r'^(.+?)\s*-\s*', v)
+            product_type = pt_van.group(1).strip() if pt_van else product_type
         product_type = re.sub(r'Fulsleeve','Fullsleeve',product_type,flags=re.I)
         product_type = re.sub(r'Oversized\s+T\s+shirt','Oversized Tshirt',product_type,flags=re.I)
         product_type = re.sub(r'Shirts?\b','Shirt',product_type,flags=re.I)
         product_type = re.sub(r'Shorts?\b','Short',product_type,flags=re.I)
         design_raw = parts[4].strip() if len(parts) >= 5 else ''
         color_raw  = parts[5].strip() if len(parts) >= 6 else ''
-        label_design = (product_type + ' ' + design_raw).strip() if product_type else design_raw
-        return f'BW_{prefix}_{sanitize(label_design,15)}_{sanitize(color_raw or "UNK",12)}_'
+        pt_code     = sanitize(product_type, 15)
+        design_code = sanitize(design_raw,   12)
+        color_code  = sanitize(color_raw,    10)
+        return f'BW_{prefix}_{pt_code}{design_code}_{color_code}_'
 
     design_raw = nz(van) if van else ''
     if not design_raw:
