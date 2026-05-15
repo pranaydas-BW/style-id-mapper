@@ -13,72 +13,98 @@ st.set_page_config(page_title="Style ID Mapper", page_icon="🏷️", layout="wi
 # ─────────────────────────────────────────────────────────────────────────────
 
 FINAL_KEY = {
+    # ── INN: use item_name, strip last -size segment ──────────────────────────
     '7-10':'inn','AADVEKA':'inn','ACK':'inn','ANNY':'inn','ARKS':'inn',
-    'Almost Gods':'inn','Anaar':'inn','Aroop India':'inn','Averie':'inn',
+    'Anaar':'inn','Aroop India':'inn','Averie':'inn',
     'BAD LIES':'inn','BADFIT':'inn','BARE BROWN':'inn','Bear House':'inn',
-    'Bewakoof':'inn','Bombay Troopers':'inn','Bummer':'inn',
+    'Bewakoof':'inn','Blissclub':'inn',
+    'Bombay Troopers':'inn','Bummer':'inn',
     'CARRIALL':'inn','CHK':'inn','CLOUT JEANS':'inn','CULTURE':'inn',
     'Capsul':'inn','DEEBACO':'inn','DREAM ISLAND':'inn',
     'DaMENSCH':'inn','Daily Life Forever52':'inn','De Novoo':'inn',
-    'Esthreall':'inn','Exhale Label':'inn','FLAWS':'inn','Fitkin':'inn',
-    'Freyja':'inn','Fuaark':'inn','Gully Labs':'inn','HEEL YOUR SOLE':'inn',
+    'Esthreall':'inn','Exhale Label':'inn','FLAWS':'inn',
+    'Gully Labs':'inn','HEEL YOUR SOLE':'inn',
     'Hamptons':'inn','House Of Mae':'inn','Huemn':'inn',
     'Instinct First':'inn','Instinct first':'inn','JulietIsDead':'inn',
     'Kingdom of White':'inn','Label Ishnya':'inn','Life & Jam':'inn',
     'MAGRE':'inn','MANACA':'inn','Masha':'inn','Misnomer':'inn',
     'Mokobara':'inn','Nasher Miles':'inn','Nobero':'inn','Nona':'inn',
+    'No Nazar':'inn',          # VAN has size embedded; INN has design+color
     'Nude Streetwear':'inn','OFFMINT':'inn','Outerworld':'inn',
     'PAZZION':'inn','PINQ POLKA':'inn','PawsnCollars':'inn','PrimalGray':'inn',
     'Qua':'inn','Qunic':'inn','RIPOFF':'inn','RWDY':'inn',
     'Rare Rabbit':'inn','Rareism':'inn','Rising Among':'inn','Roar For Good':'inn',
     'SIHANSH':'inn','STITCH STORIES':'inn','SUBTRACT':'inn','Stitchinc':'inn',
-    'Style Island':'inn','Suta':'inn','Terminal Z':'inn','Terractive':'inn',
-    'The Finicky Colorist':'inn','The Forbidden Fruit':'inn',
+    'Style Island':'inn',      # VAN has size; INN correctly groups same design
+    'Suta':'inn','Terminal Z':'inn','Terractive':'inn',
+    'The Finicky Colorist':'inn','The Forbidden Fruit':'aid',  # → see AID below
     'The Mitesh':'inn','Tinkle':'inn','Urban Jungle':'inn','Urbano Fashion':'inn',
-    'VINDOF':'inn','Virgio':'inn','WAKE YOUR DREAM':'inn','WARPING THEORIES':'inn',
+    'VINDOF':'inn','Virgio':'van',  # VAN is the product code (VWWTO...)
+    'WAKE YOUR DREAM':'inn','WARPING THEORIES':'inn',
     'Western Era':'inn','WomanLikeU':'inn','Xaya':'inn','ZORI WORLD':'inn',
     'bare wear':'inn','hexafun':'inn','sorta':'inn',
     'ATBW':'inn','Aakar Taro':'inn','LVL99':'inn','Love Pangolin':'inn',
-    'ARISTOBRAT':'van','Aaina Sleepwear':'van','Aer':'van','Aldeno':'van',
+    # ── VAN: use vendor_article_name, strip trailing size ─────────────────────
+    '63 East':'van',           # VAN=design name; INN has collection not design
+    'ARISTOBRAT':'van','Aaina Sleepwear':'van',
+    'Aldeno':'van',
+    'Almost Gods':'aid',       # → see AID (VAN has size; AID is numeric per barcode)
+    'Aer':'van',
+    'Auburban':'van',          # VAN = NOIR WOOL VEST / NOIR LUREX VEST (distinct designs)
     'Around The City':'van','BAWSE':'van','BLCKORCHID':'van','BOOZY BUTTON':'van',
-    'Blissclub':'van','Bomaachi':'van','Broke Memers':'van','By The Bay':'van',
-    'CAI':'van','Cava':'van','COMET':'van','Contemponari':'van',
+    'Bomaachi':'van','Broke Memers':'van','By The Bay':'van',
+    'CAI':'van','Cava':'van','COMET':'van',
     'Crazy Mosquitoes':'van','DULAAR':'van','Dash and Dot':'van','DenZ':'van',
-    'Dhaaga':'van','DOG D ORIGINALS':'van','Dorabi':'van','EVERDION':'van',
+    'DOG D ORIGINALS':'van','Dorabi':'van','EVERDION':'van',
     'Ewoke':'van','FLYAF':'van','FUR JADEN':'van','FYVA':'van',
     'Fearless Under Everything':'van','Femmella':'van',
-    'Freakins':'van','GOTHIC TOONS':'van','Genes Lecoanet Hemant':'van',
+    'GOTHIC TOONS':'van','Genes Lecoanet Hemant':'van',
     'House of Fett':'van','IWE STUDIOS':'van','Imperfecto':'van',
     'Invogue':'van','KIU':'van','Kairo':'van','Kickers':'van',
     'LALAFLOWER':'van','Lovicide':'van','Ludic':'van',
     'MODAU':'van','MOKY':'van','Modern Crew':'van','Nap Story':'van',
-    'NautiNati':'van','No Nazar':'van','Notch Above':'van','OZiva':'van',
+    'NautiNati':'van','Notch Above':'van','OZiva':'aid',  # → see AID
     'PAST MODERN':'van','PRDGY':'van','Poppi':'van','Private Lives':'van',
     'PurplFrog':'van','QB - QUINTESSENTIAL BASICS':'van',
-    'RATAN JAIPUR':'van','REDONRAW':'van','Rarez':'van','Replyall':'van',
+    'RATAN JAIPUR':'van','REDONRAW':'van','Rarez':'van',
     'SKO':'van','SLEEPLOVE':'van','STRANGE':'van','Shop Mauve':'van',
-    'StyleAsh':'van','Sugga':'van','Sullitt':'van','TENHEM':'van',
+    'Sullitt':'van','TENHEM':'van',
     'THE PONY & PEONY CO.':'van','TONI ROSSI':'van','TURMS':'van',
     'Tailor&Circus':'van','Tao Paris':'van','The Clothing Factory':'van',
     'The Khwaab':'van','The Label Life':'van','The Original Knit':'van',
     'The Pant Project':'van','The Souled Store':'van','Theater':'van',
     'Thr3letter':'van','Trendy Affair':'van','TrueBrowns':'van',
     'Tura Turi':'van','Twelve Thirty One':'van','Un Denim':'van',
-    'Uptownie':'van','WOOMN':'van','Younglings':'van','Zeesh':'van',
-    'Zumee':'van','teeside':'van',
-    '63 East':'van','Auburban':'van','Khushbu Rathod Label':'van','Natty Garb':'van',
+    'WOOMN':'van','Younglings':'van','Zeesh':'van','Zumee':'van','teeside':'van',
+    'Auburban':'van','Khushbu Rathod Label':'van','Natty Garb':'van',
+    # ── AID: use vendor_article_id, strip trailing size ───────────────────────
     'A Toddler Thing':'aid','ARISTA VAULT':'aid','BILABA':'aid',
+    'Almost Gods':'aid',       # AID is numeric (53364), same per design, VAN has size
     'Bird Eye':'aid','Bluer':'aid','Ceya':'aid','Chapter 2':'aid',
-    'COLOR CAPITAL':'aid','Duchess Kumari':'aid','ECHO STUDIO':'aid',
-    'EUME':'aid','Echolope':'aid','FEIER':'aid','Farda':'aid',
+    'COLOR CAPITAL':'aid',
+    'Contemponari':'aid',
+    'Duchess Kumari':'aid','ECHO STUDIO':'aid','EUME':'aid','Echolope':'aid',
+    'FEIER':'aid','Farda':'aid',
+    'The Forbidden Fruit':'aid',  # AID: californiaXL→california, watermelonteeXL→watermelontee
+    'Dhaaga':'aid',
+    'Fitkin':'aid',
+    'Freakins':'aid',
+    'Freyja':'aid',
+    'Fuaark':'aid',            # AID FBKCSTSHT10=Brisk, FLCRNTSHT10=Legacy
     'GINNA':'aid','House Of Kari':'aid','House of Koala':'aid','Hunnit':'aid',
     'KHAAKI':'aid','Lea Clothing':'aid','Lino Perros':'aid',
     'MAIN CHARACTER':'aid','Muvazo':'aid','NeceSera':'aid','Nishorama':'aid',
+    'OZiva':'aid',             # AID SAGE0106=Amalia, SAGE0160=Emily — unique per design
     'Ombrello':'aid','Oroh':'aid','PastModern':'aid',
     'Rare Ones':'aid','SEEAASH':'aid','Saanjh by Lea':'aid',
+    'Replyall':'aid',
     'Sew and You':'aid','Shibui':'aid','STUDIO MODA INDIA':'aid',
+    'StyleAsh':'aid',
+    'Sugga':'aid',
     'Suqah':'aid','TRUE WEST':'aid','The White Pole':'aid',
-    'Torqadorn':'aid','Vellure':'aid','neopalms':'aid',
+    'Torqadorn':'aid',
+    'Uptownie':'aid',
+    'Vellure':'aid','neopalms':'aid',
 }
 
 SIZE_ALIASES = {'2XL':'XXL','XXL':'2XL','3XL':'XXXL','XXXL':'3XL'}
@@ -184,6 +210,32 @@ def get_style_key(row):
             v2 = re.sub(r'[A-Z]$','',aid).strip(); val = v2 if v2!=aid else strip_size(aid,size)
         elif brand == 'Bird Eye':
             p = aid.split('-'); val = '-'.join(p[:2]).strip() if len(p)>=2 else strip_size(aid,size)
+        elif brand == 'StyleAsh':
+            # AID "11 DBHP - Beige 3" → strip trailing space+digit = "11 DBHP - Beige"
+            val = re.sub(r'\s+\d+$', '', nz(aid)).strip()
+        elif brand == 'Sugga':
+            # AID Blue_Shirt-L / Blue_shirt-M → strip_size handles it; case-normalise
+            val = strip_size(aid, size).lower()
+        elif brand in ('Dhaaga', 'Freakins', 'Fitkin', 'Freyja',
+                       'Replyall', 'Uptownie', 'Contemponari'):
+            # Standard strip — AID encodes design+color, size is the suffix
+            val = strip_size(aid, size)
+        elif brand == 'Fuaark':
+            # AID FBKCSTSHT10-M → strip -size → FBKCSTSHT10 (unique per design)
+            val = strip_size(aid, size)
+        elif brand == 'Almost Gods':
+            # AID is numeric (53364) — same per design; VAN has size embedded
+            val = nz(aid).split()[0].strip()  # take just the number, strip any suffix
+        elif brand == 'The Forbidden Fruit':
+            # AID: californiaXL → strip size letters → california
+            val = SIZE_PAT.sub('', nz(aid)).strip().rstrip('-_ ')
+        elif brand == 'OZiva':
+            # AID: SAGE0106-XS → SAGE0106 (unique per design)
+            val = strip_size(aid, size)
+        elif brand == 'Blissclub':
+            # AID: 4371001001002 — first 7 digits = design code
+            # 4371001 = Ultimate Kick Flare, 4391001 = Cloud Korean Pants
+            val = nz(aid)[:7] if nz(aid).isdigit() else strip_size(aid, size)
         else:
             val = strip_size(aid, size)
     elif kt == 'van':
@@ -193,10 +245,29 @@ def get_style_key(row):
         elif brand == 'Ludic':
             v = nz(van)
             val = re.sub(r'\s+(MEN\s+|WOMEN\s+)?\d{1,3}$','',v,flags=re.IGNORECASE).strip() or v
+        elif brand == 'Virgio':
+            # VAN is the actual product code (VWWTO242600670124); use as-is
+            val = nz(van) if van else strip_size(aid, size)
         else:
             val = strip_size(van,size) if van else strip_size(aid,size)
-    else:
-        val = inn_key(iname)
+    else:  # inn
+        if brand == 'Instinct First' or brand == 'Instinct first':
+            # item_name: Brand-Gender-Division-Node-DESIGN-Color-Season-Size
+            # design at [4], color at [5] — VAN alternates between color word and design name
+            parts = nz(iname).split('-')
+            design = parts[4].strip() if len(parts) >= 5 else ''
+            color  = parts[5].strip() if len(parts) >= 6 else ''
+            val = (design + '-' + color).strip('-')
+            val = val if val else inn_key(iname)
+        else:
+            val = inn_key(iname)
+
+    # SOL锟斤拷ITE and VYAM锟斤拷S: AID is the reliable key regardless of FINAL_KEY encoding
+    if 'SOL' in brand.upper() and 'ITE' in brand.upper():
+        val = strip_size(aid, size)
+    elif 'VYAM' in brand.upper():
+        # AID: CD/WOM/DEN/BLU - s → strip trailing " - size"
+        val = re.sub(r'\s*-\s*\w+\s*$', '', nz(aid)).strip()
 
     return clean(brand)+'||'+clean(val)+'||'+cat_key
 
@@ -295,9 +366,19 @@ def batch_insert_styles(new_rows, conn):
 # MAIN MAPPING  — all DB work in 3 round-trips regardless of file size
 # ─────────────────────────────────────────────────────────────────────────────
 
-def map_dataframe(df, conn, progress=None, status=None):
-    if status: status.text("Step 1/4 — computing style keys…")
-    if progress: progress.progress(0.05)
+def map_dataframe(df, conn, progress=None, status=None, live=None):
+    total = len(df)
+
+    def live_update(step_pct, msg, rows_done=None, new_so_far=None):
+        if progress: progress.progress(step_pct)
+        if status:   status.text(msg)
+        if live and rows_done is not None:
+            pct = int(rows_done / total * 100)
+            live.markdown(
+                f"⏳ **{rows_done:,} / {total:,} rows** processed &nbsp;·&nbsp; "
+                f"🆕 **{new_so_far:,}** new style IDs generated so far &nbsp; `{pct}%`")
+
+    live_update(0.05, "Step 1/4 — computing style keys…", 0, 0)
 
     # ── Step 1: compute all style keys (pure Python, no DB) ──────────────────
     rows_meta = []
@@ -322,30 +403,29 @@ def map_dataframe(df, conn, progress=None, status=None):
     if progress: progress.progress(0.25)
 
     # ── Step 2: batch fetch all existing style keys (1 query) ────────────────
-    if status: status.text("Step 2/4 — looking up existing style IDs…")
+    live_update(0.30, "Step 2/4 — looking up existing style IDs…", 0, 0)
     all_keys = list({m['style_key'] for m in rows_meta})
     key_to_sid = batch_lookup_style_keys(all_keys, conn)
-
-    if progress: progress.progress(0.45)
+    live_update(0.45, "Step 2/4 — done.", 0, 0)
 
     # ── Step 3: batch fetch key sizes (1 query) ───────────────────────────────
-    if status: status.text("Step 3/4 — looking up key sizes…")
+    live_update(0.50, "Step 3/4 — looking up key sizes…", 0, 0)
     all_size_tuples = list({m['size_tuple'] for m in rows_meta})
     size_map = batch_lookup_key_sizes(all_size_tuples, conn)
-
-    if progress: progress.progress(0.55)
+    live_update(0.60, "Step 3/4 — done.", 0, 0)
 
     # ── Step 4: resolve new style IDs (1 query for base sequences) ───────────
-    if status: status.text("Step 4/4 — generating new style IDs…")
+    live_update(0.62, "Step 4/4 — generating new style IDs…", 0, 0)
     new_keys  = {m['style_key'] for m in rows_meta if m['style_key'] not in key_to_sid}
     new_bases = {m['base'] for m in rows_meta if m['style_key'] in new_keys}
     base_max  = fetch_existing_bases(new_bases, conn) if new_bases else {}
 
-    # Assign new style IDs in memory (no DB per row)
-    base_next  = {b: base_max.get(b, 0) + 1 for b in new_bases}
-    new_inserts = []  # (style_key, style_id, brand)
+    # Assign new style IDs in memory — tick the live counter as we go
+    base_next   = {b: base_max.get(b, 0) + 1 for b in new_bases}
+    new_inserts = []
+    new_so_far  = 0
 
-    for m in rows_meta:
+    for i, m in enumerate(rows_meta):
         sk = m['style_key']
         if sk not in key_to_sid:
             base = m['base']
@@ -354,6 +434,11 @@ def map_dataframe(df, conn, progress=None, status=None):
             sid = base + str(seq).zfill(2)
             key_to_sid[sk] = sid
             new_inserts.append((sk, sid, m['brand']))
+            new_so_far += 1
+        # Update live counter every 50 rows
+        if i % 50 == 0 or i == len(rows_meta) - 1:
+            pct = 0.62 + 0.28 * (i + 1) / len(rows_meta)
+            live_update(pct, "Step 4/4 — assigning style IDs…", i + 1, new_so_far)
 
     # ── Step 5: batch insert all new rows (1 query) ───────────────────────────
     batch_insert_styles(new_inserts, conn)
@@ -367,12 +452,13 @@ def map_dataframe(df, conn, progress=None, status=None):
     df['style_group_id'] = style_ids
     df['key_size']       = key_sizes
 
-    matched   = sum(1 for m in rows_meta if m['style_key'] in key_to_sid and
-                    (sk := m['style_key']) not in {r[0] for r in new_inserts})
-    generated = len({r[0] for r in new_inserts})  # unique new keys
+    new_keys_inserted = {r[0] for r in new_inserts}   # style_keys that are brand new
+    generated = len(new_keys_inserted)                 # unique new style IDs created
+    matched   = sum(1 for m in rows_meta
+                    if m['style_key'] not in new_keys_inserted)  # rows resolved from DB
 
     if progress: progress.progress(1.0)
-    return df, len(style_ids) - generated, generated
+    return df, matched, generated
 
 # ─────────────────────────────────────────────────────────────────────────────
 # FLAGGING
@@ -465,22 +551,23 @@ if uploaded:
         if st.button("▶ Map Style IDs", type="primary"):
             progress = st.progress(0.0)
             status   = st.empty()
+            live     = st.empty()
 
             conn    = get_db()
-            result, matched, generated = map_dataframe(df_raw, conn, progress, status)
+            result, matched, generated = map_dataframe(df_raw, conn, progress, status, live)
             status.empty()
+            live.empty()
 
-            st.success(
-                f"Done! **{matched:,}** matched from DB · "
-                f"**{generated:,}** new Style IDs generated · "
-                f"**{result['style_group_id'].nunique():,}** unique style IDs total")
+            st.success("✅ Mapping complete!")
 
             bc = result.groupby('style_group_id')['bar_code'].count()
-            m1,m2,m3,m4 = st.columns(4)
-            m1.metric("Unique style IDs", result['style_group_id'].nunique())
-            m2.metric("Median barcodes",  int(bc.median()))
-            m3.metric("Styles >10 bc",    int((bc>10).sum()))
-            m4.metric("Styles >15 bc",    int((bc>15).sum()))
+            m1,m2,m3,m4,m5,m6 = st.columns(6)
+            m1.metric("Total rows",        f"{len(result):,}")
+            m2.metric("Matched from DB",   f"{matched:,}")
+            m3.metric("New IDs generated", f"{generated:,}")
+            m4.metric("Unique style IDs",  f"{result['style_group_id'].nunique():,}")
+            m5.metric("Styles >10 bc",     int((bc>10).sum()))
+            m6.metric("Median barcodes",   int(bc.median()))
 
             flag_df = flag_over10(result)
             if len(flag_df):
