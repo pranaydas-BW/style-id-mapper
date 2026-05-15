@@ -25,7 +25,7 @@ FINAL_KEY = {
     'Esthreall':'inn','Exhale Label':'inn','FLAWS':'inn',
     'Gully Labs':'inn','HEEL YOUR SOLE':'inn',
     'Hamptons':'inn','House Of Mae':'inn','Huemn':'inn',
-    'Instinct First':'inn','Instinct first':'inn','JulietIsDead':'inn',
+    'Instinct First':'van','Instinct first':'van','JulietIsDead':'inn',
     'Kingdom of White':'inn','Label Ishnya':'inn','Life & Jam':'inn',
     'MAGRE':'inn','MANACA':'inn','Masha':'inn','Misnomer':'inn',
     'Mokobara':'inn','Nasher Miles':'inn','Nobero':'inn','Nona':'inn',
@@ -265,23 +265,9 @@ def get_style_key(row):
             val = strip_size(van,size) if van else strip_size(aid,size)
     else:  # inn
         if brand == 'Instinct First' or brand == 'Instinct first':
-            # item_name: Brand-Gender-Division-Node-DESIGN-Color-Season-Size
-            # design at [4], color at [5]
-            parts = nz(iname).split('-')
-            design = parts[4].strip() if len(parts) >= 5 else ''
-            color  = parts[5].strip() if len(parts) >= 6 else ''
-            inn_base = (design + '-' + color).strip('-')
-            # Extract marker from AID after size: IN-ST-BL-L-OV → marker=OV
-            # Split AID by '-', find size position, take everything after
-            aid_parts = nz(aid).split('-')
-            sz_upper  = nz(size).upper()
-            marker    = ''
-            for i, p in enumerate(aid_parts):
-                if p.upper() == sz_upper:
-                    marker = '-'.join(aid_parts[i+1:]).strip()
-                    break
-            val = (inn_base + ('-' + marker if marker else '')).strip('-')
-            val = val if val else inn_key(iname)
+            # VAN = "Oversized Tshirt - Black - L" → strip size → "Oversized Tshirt - Black"
+            # This naturally encodes product type + color, regardless of VAN2 alternating
+            val = strip_size(van, size) if van else inn_key(iname)
         else:
             val = inn_key(iname)
 
