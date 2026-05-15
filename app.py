@@ -55,7 +55,7 @@ FINAL_KEY = {
     'Bomaachi':'van','Broke Memers':'van','By The Bay':'van',
     'CAI':'van','Cava':'van','COMET':'van',
     'Crazy Mosquitoes':'van','DULAAR':'van','Dash and Dot':'van','DenZ':'van',
-    'DOG D ORIGINALS':'van','Dorabi':'van','EVERDION':'van',
+    'Dorabi':'van','EVERDION':'van',
     'Ewoke':'van','FLYAF':'van','FUR JADEN':'van','FYVA':'van',
     'Fearless Under Everything':'van','Femmella':'van',
     'GOTHIC TOONS':'van','Genes Lecoanet Hemant':'van',
@@ -69,7 +69,7 @@ FINAL_KEY = {
     'RATAN JAIPUR':'van','REDONRAW':'van','Rarez':'van',
     'SKO':'van','SLEEPLOVE':'van','STRANGE':'van','Shop Mauve':'van',
     'Sullitt':'van','TENHEM':'van',
-    'THE PONY & PEONY CO.':'van','TONI ROSSI':'van','TURMS':'van',
+    'THE PONY & PEONY CO.':'van','TURMS':'van',
     'Tailor&Circus':'van','Tao Paris':'van','The Clothing Factory':'van',
     'The Khwaab':'van','The Label Life':'van','The Original Knit':'van',
     'The Pant Project':'van','The Souled Store':'van','Theater':'van',
@@ -104,6 +104,8 @@ FINAL_KEY = {
     'Suqah':'aid','TRUE WEST':'aid','The White Pole':'aid',
     'Torqadorn':'aid',
     'Uptownie':'aid',
+    'TONI ROSSI':'aid',        # AID encodes design+color: 8596119056660_Black (strip _EU\d+)
+    'DOG D ORIGINALS':'aid',   # AID already has color: aki-laptop-backpack_Bottle Green
     'Vellure':'aid','neopalms':'aid',
 }
 
@@ -233,9 +235,20 @@ def get_style_key(row):
             # AID: SAGE0106-XS → SAGE0106 (unique per design)
             val = strip_size(aid, size)
         elif brand == 'Blissclub':
-            # AID: 4371001001002 — first 7 digits = design code
-            # 4371001 = Ultimate Kick Flare, 4391001 = Cloud Korean Pants
-            val = nz(aid)[:7] if nz(aid).isdigit() else strip_size(aid, size)
+            # Numeric AID: 4391001001002 — first 10 digits = design(7) + color(3)
+            # Text AID: AirMelt Crop tee_Arya Airmelt Fig_L — strip trailing _SIZE
+            a = nz(aid)
+            if a.replace(' ','').replace('-','').isdigit() or (len(a)>=10 and a[:7].isdigit()):
+                val = a[:10]
+            else:
+                val = strip_size(a, size)
+        elif brand == 'TONI ROSSI':
+            # AID: 8596119056660_Black_EU44 → strip _EU\d+ → 8596119056660_Black
+            val = re.sub(r'_EU\d+$', '', nz(aid), flags=re.IGNORECASE).strip()
+            val = val if val != nz(aid) else strip_size(nz(aid), size)
+        elif brand == 'DOG D ORIGINALS':
+            # AID already encodes design+color: aki-laptop-backpack_Bottle Green (no size)
+            val = nz(aid)
         else:
             val = strip_size(aid, size)
     elif kt == 'van':
