@@ -607,6 +607,23 @@ if uploaded:
     try:
         df_raw = pd.read_csv(uploaded)
         df_raw.columns = [c.strip() for c in df_raw.columns]
+
+        # Auto-detect headerless CSV
+        EXPECTED_COLS_12 = ['item_code','vendor_article_id','vendor_article_name','vendor_article_name2',
+                            'division','section','department','brand_name','node','item_name','size']
+        EXPECTED_COLS_STD = ['item_code','bar_code','vendor_article_id','vendor_article_name',
+                             'division','section','department','brand_name','node','item_name','size']
+        if 'brand_name' not in df_raw.columns and len(df_raw.columns) >= 11:
+            uploaded.seek(0)
+            df_raw = pd.read_csv(uploaded, header=None)
+            if len(df_raw.columns) == 11:
+                # 11-col format: no bar_code, col[1]=AID, col[2]=VAN-description, col[3]=VAN
+                df_raw.columns = EXPECTED_COLS_12
+                # bar_code = item_code for these rows (no separate barcode column)
+                df_raw['bar_code'] = df_raw['item_code']
+            else:
+                df_raw.columns = EXPECTED_COLS_STD[:len(df_raw.columns)]
+            st.info("ℹ️ No header row detected — column names assigned automatically.")
         n_rows   = len(df_raw)
         n_brands = df_raw['brand_name'].nunique() if 'brand_name' in df_raw.columns else '?'
         st.write(f"**{n_rows:,} rows** · **{n_brands} brands** detected")
