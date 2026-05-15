@@ -14,13 +14,15 @@ st.set_page_config(page_title="Style ID Mapper", page_icon="🏷️", layout="wi
 
 FINAL_KEY = {
     # ── INN: use item_name, strip last -size segment ──────────────────────────
-    '7-10':'inn','AADVEKA':'inn','ACK':'inn','ANNY':'inn','ARKS':'inn',
+    '7-10':'inn','AADVEKA':'inn','ACK':'inn','ARKS':'inn',
+    'ANNY':'van',              # VAN is unique per design (Draped Mesh Corset, Lace Embroidery etc)
     'Anaar':'inn','Aroop India':'inn','Averie':'inn',
     'BAD LIES':'inn','BADFIT':'inn','BARE BROWN':'inn','Bear House':'inn',
     'Bewakoof':'inn',
     'Bombay Troopers':'inn','Bummer':'inn',
     'CARRIALL':'inn','CHK':'inn','CLOUT JEANS':'inn','CULTURE':'inn',
-    'Capsul':'inn','DEEBACO':'inn','DREAM ISLAND':'inn',
+    'Capsul':'van',            # VAN = Y2K Pro (Shadow Black) unique per design; AID is barcode-level
+    'DEEBACO':'inn','DREAM ISLAND':'inn',
     'DaMENSCH':'inn','Daily Life Forever52':'inn','De Novoo':'inn',
     'Esthreall':'inn','Exhale Label':'inn','FLAWS':'inn',
     'Gully Labs':'inn','HEEL YOUR SOLE':'inn',
@@ -29,21 +31,25 @@ FINAL_KEY = {
     'Kingdom of White':'inn','Label Ishnya':'inn','Life & Jam':'inn',
     'MAGRE':'inn','MANACA':'inn','Masha':'inn','Misnomer':'inn',
     'Mokobara':'inn','Nasher Miles':'inn','Nobero':'inn','Nona':'inn',
-    'No Nazar':'inn',          # VAN has size embedded; INN has design+color
-    'Nude Streetwear':'inn','OFFMINT':'inn','Outerworld':'inn',
+    'No Nazar':'inn','Nude Streetwear':'inn','OFFMINT':'inn',
+    'Outerworld':'aid',        # AID OWPOLO94-POLO-GRY-M-L strip last -SIZE = unique per design
     'PAZZION':'inn','PINQ POLKA':'inn','PawsnCollars':'inn','PrimalGray':'inn',
-    'Qua':'inn','Qunic':'inn','RIPOFF':'inn','RWDY':'inn',
+    'Qua':'inn','RIPOFF':'inn','RWDY':'inn',
+    'Qunic':'aid',             # AID Q172 = Celina, Q186 = Eclipse Grace
     'Rare Rabbit':'inn','Rareism':'inn','Rising Among':'inn','Roar For Good':'inn',
-    'SIHANSH':'inn','STITCH STORIES':'inn','SUBTRACT':'inn','Stitchinc':'inn',
-    'Style Island':'inn',      # VAN has size; INN correctly groups same design
+    'SIHANSH':'aid',           # AID Breathe_Shirt_XL → Breathe_Shirt; Bumbee_Shirt_L → Bumbee_Shirt
+    'STITCH STORIES':'inn','SUBTRACT':'inn','Stitchinc':'inn',
+    'Style Island':'inn',
     'Suta':'inn','Terminal Z':'inn','Terractive':'inn',
-    'The Finicky Colorist':'inn','The Forbidden Fruit':'aid',  # → see AID below
-    'The Mitesh':'inn','Tinkle':'inn','Urban Jungle':'inn','Urbano Fashion':'inn',
-    'VINDOF':'inn','Virgio':'van',  # VAN is the product code (VWWTO...)
+    'The Finicky Colorist':'inn','The Forbidden Fruit':'aid',
+    'The Mitesh':'inn','Tinkle':'inn','Urban Jungle':'inn',
+    'Urbano Fashion':'aid',    # AID jeanstrtwhsk-iceblue-30 strip -30 = jeanstrtwhsk-iceblue
+    'VINDOF':'inn','Virgio':'van',
     'WAKE YOUR DREAM':'inn','WARPING THEORIES':'inn',
     'Western Era':'inn','WomanLikeU':'inn','Xaya':'inn','ZORI WORLD':'inn',
     'bare wear':'inn','hexafun':'inn','sorta':'inn',
-    'ATBW':'inn','Aakar Taro':'inn','LVL99':'inn','Love Pangolin':'inn',
+    'ATBW':'inn','Aakar Taro':'aid',  # AID AT-R24-S-08_PNK strip _XS = AT-R24-S-08_PNK
+    'LVL99':'inn','Love Pangolin':'inn',
     # ── VAN: use vendor_article_name, strip trailing size ─────────────────────
     '63 East':'van',           # VAN=design name; INN has collection not design
     'ARISTOBRAT':'van','Aaina Sleepwear':'van',
@@ -163,28 +169,34 @@ def inn_key(iname):
 
 def valkyre_normalize_design(van):
     d = nz(van)
+    # For VALK- old format, VAN has size embedded: "Butterfly Breeze Valkyre Jacket Black 2XL"
+    # Strip trailing size + color + product words
     for p in [SIZE_PAT, PROD_PAT, COLOR_PAT]:
         d = p.sub('', d)
     d = re.sub(r"['\u2019\u2018`]", '', d)
     d = re.sub(r'[^a-zA-Z0-9\s]', ' ', d)
     return re.sub(r'\s+', ' ', d).strip().lower()
 
-def valkyre_color(aid, iname):
-    aid = nz(aid); parts = nz(iname).split('-')
+def valkyre_color(aid, iname, van=''):
+    aid = nz(aid); parts = nz(iname).split('-'); van = nz(van)
     if aid.startswith('VJAC-'):
         m = re.match(r'VJAC-[^-]+-([A-Z]+)_', aid)
         if m: return m.group(1).upper()
         c = parts[-2].strip() if len(parts) >= 3 else ''
         if c and not SEASON_PAT.match(c) and c.upper() not in ('NA','N/A',''):
             return re.sub(r'\s+','',c).upper()[:8]
+        # Try to extract color from VAN (e.g. "BUTTERFLY BREEZE VALKYRE JACKET" → no color → BLK)
         return 'BLK'
     if aid.startswith('VALK-'): return 'BLK'
+    # Other formats (VLKY-, VHOD-, HOD-, JAC-, etc.) — try INN[-3] then INN[-2] then BLK
     if len(parts) >= 4:
         c3 = parts[-3].strip()
         if c3 and not SEASON_PAT.match(c3) and c3.upper() not in ('NA','N/A',''):
             return re.sub(r'\s+','',c3).upper()[:10]
     c2 = parts[-2].strip() if len(parts) >= 3 else ''
-    return re.sub(r'\s+','',c2).upper()[:8] if c2 and c2.upper() not in ('NA','N/A','') else 'NA'
+    if c2 and c2.upper() not in ('NA','N/A','') and not SEASON_PAT.match(c2):
+        return re.sub(r'\s+','',c2).upper()[:8]
+    return 'BLK'  # default to BLK instead of NA
 
 def get_style_key(row):
     brand = nz(row.get('brand_name',''))
@@ -200,7 +212,9 @@ def get_style_key(row):
     ])
 
     if brand == 'VALKYRE':
-        return clean(brand)+'||'+valkyre_normalize_design(van)+'||'+valkyre_color(aid,iname)+'||'+cat_key
+        design = valkyre_normalize_design(van)
+        color  = valkyre_color(aid, iname, van)
+        return clean(brand) + '||' + design + '||' + color + '||' + cat_key
 
     kt = FINAL_KEY.get(brand, 'inn')
     if kt == 'aid':
@@ -263,11 +277,14 @@ def get_style_key(row):
             val = nz(van) if van else strip_size(aid, size)
         else:
             val = strip_size(van,size) if van else strip_size(aid,size)
+            # Normalise multiple spaces (e.g. CAI "circa navy blue  sliders")
+            val = re.sub(r'\s{2,}', ' ', val).strip()
     else:  # inn
         if brand == 'Instinct First' or brand == 'Instinct first':
-            # VAN = "Oversized Tshirt - Black - L" → strip size → "Oversized Tshirt - Black"
-            # This naturally encodes product type + color, regardless of VAN2 alternating
-            val = strip_size(van, size) if van else inn_key(iname)
+            # AID = "Oversized Tshirt - Black - L" → strip size → "Oversized Tshirt - Black"
+            # Normalise spaces around hyphens to handle "Shirt -Blue" vs "Shirt - Blue"
+            v = strip_size(van, size) if van else strip_size(aid, size)
+            val = re.sub(r'\s*-\s*', ' - ', v).strip().rstrip(' -').strip()
         else:
             val = inn_key(iname)
 
