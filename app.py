@@ -17,7 +17,7 @@ FINAL_KEY = {
     '7-10':'inn','AADVEKA':'inn','ACK':'inn','ANNY':'inn','ARKS':'inn',
     'Anaar':'inn','Aroop India':'inn','Averie':'inn',
     'BAD LIES':'inn','BADFIT':'inn','BARE BROWN':'inn','Bear House':'inn',
-    'Bewakoof':'inn','Blissclub':'inn',
+    'Bewakoof':'inn',
     'Bombay Troopers':'inn','Bummer':'inn',
     'CARRIALL':'inn','CHK':'inn','CLOUT JEANS':'inn','CULTURE':'inn',
     'Capsul':'inn','DEEBACO':'inn','DREAM ISLAND':'inn',
@@ -80,7 +80,7 @@ FINAL_KEY = {
     # ── AID: use vendor_article_id, strip trailing size ───────────────────────
     'A Toddler Thing':'aid','ARISTA VAULT':'aid','BILABA':'aid',
     'Almost Gods':'aid',       # AID is numeric (53364), same per design, VAN has size
-    'Bird Eye':'aid','Bluer':'aid','Ceya':'aid','Chapter 2':'aid',
+    'Bird Eye':'aid','Blissclub':'aid','Bluer':'aid','Ceya':'aid','Chapter 2':'aid',
     'COLOR CAPITAL':'aid',
     'Contemponari':'aid',
     'Duchess Kumari':'aid','ECHO STUDIO':'aid','EUME':'aid','Echolope':'aid',
@@ -478,7 +478,11 @@ def map_dataframe(df, conn, progress=None, status=None, live=None):
 # ─────────────────────────────────────────────────────────────────────────────
 
 VAN_IS_SIZE_BRANDS = {'Ludic'}
-SOURCE_DATA_BRANDS = {'Averie','Blissclub'}
+SOURCE_DATA_BRANDS = {'Averie'}
+# Brands where VAN has unicode garbage variants of the same text — use AID count instead
+AID_KEYED_BRANDS   = {'House Of Kari', 'House of Koala'}
+# Brands where VAN alternates between design name and color word for same product
+DUAL_VAN_BRANDS    = {'Instinct First', 'Instinct first'}
 
 def flag_over10(df):
     bc = df.groupby('style_group_id')['bar_code'].count()
@@ -487,10 +491,49 @@ def flag_over10(df):
     for sid, cnt in over10.items():
         grp   = df[df['style_group_id'] == sid]
         brand = grp['brand_name'].iloc[0]
-        vans  = sorted(set(clean(v) for v in grp['vendor_article_name'].dropna().unique()))
         nodes = sorted(set(nz(n) for n in grp['node'].dropna().unique()))
         sizes = sorted(set(nz(s) for s in grp['size'].dropna().unique()))
-        n_van = len(vans); n_node = len(nodes)
+        n_node = len(nodes)
+
+        # For AID-keyed brands, use stripped AID count instead of VAN
+        if brand in AID_KEYED_BRANDS:
+            import unicodedata as _ud
+            def _strip_aid(aid, size):
+                t = str(aid).strip(); sz = str(size).strip()
+                m = re.sub(re.escape('_'+sz)+r'$','',t,flags=re.IGNORECASE)
+                return m.rstrip('_').strip() if m!=t else t
+            aid_keys = set(_strip_aid(a,s) for a,s in zip(grp['vendor_article_id'], grp['size']))
+            n_designs = len(aid_keys)
+            flag = 'GENUINE' if n_designs==1 else 'WRONG'
+            reason = (f'1 design (AID: {next(iter(aid_keys))}), {len(sizes)} sizes'
+                      if n_designs==1 else f'{n_designs} distinct AIDs after strip')
+            vans = sorted(set(clean(v) for v in grp['vendor_article_name'].dropna().unique()))
+            rows.append({'style_group_id':sid,'brand':brand,'barcodes':cnt,
+                         'unique_vans':len(vans),'flag':flag,'reason':reason,
+                         'van_sample':' | '.join(v[:40] for v in vans[:3]),
+                         'sizes':','.join(sizes[:12])})
+            continue
+
+        # For dual-VAN brands, only flag if INN keys differ
+        if brand in DUAL_VAN_BRANDS:
+            inn_keys = set()
+            for iname in grp['item_name'].dropna().unique():
+                parts = str(iname).split('-')
+                design = parts[4].strip() if len(parts)>=5 else ''
+                color  = parts[5].strip() if len(parts)>=6 else ''
+                inn_keys.add(f'{design}-{color}')
+            flag = 'GENUINE' if len(inn_keys)==1 else 'WRONG'
+            reason = (f'1 design+color key, {len(sizes)} sizes'
+                      if len(inn_keys)==1 else f'{len(inn_keys)} distinct design-color keys')
+            vans = sorted(set(clean(v) for v in grp['vendor_article_name'].dropna().unique()))
+            rows.append({'style_group_id':sid,'brand':brand,'barcodes':cnt,
+                         'unique_vans':len(vans),'flag':flag,'reason':reason,
+                         'van_sample':' | '.join(v[:40] for v in vans[:3]),
+                         'sizes':','.join(sizes[:12])})
+            continue
+
+        vans  = sorted(set(clean(v) for v in grp['vendor_article_name'].dropna().unique()))
+        n_van = len(vans)
 
         if n_node > 1:
             flag='WRONG';   reason=f'Multiple nodes: {", ".join(nodes)}'
