@@ -309,7 +309,30 @@ def get_style_key(row):
             else:
                 val = inn_key(iname)
         else:
-            val = inn_key(iname)
+            # ── Smart fallback for unknown brands ────────────────────────────
+            # Try: product_type (AID/VAN before first " - ") + design (INN[4]) + color (INN[5])
+            # Same logic as Instinct First — works for most structured data
+            parts_inn = nz(iname).split('-')
+            design = parts_inn[4].strip() if len(parts_inn) >= 5 else ''
+            color  = parts_inn[5].strip() if len(parts_inn) >= 6 else ''
+
+            # Product type from AID
+            a = nz(aid)
+            pt_match = re.match(r'^(.+?)\s+-\s*', a)
+            product_type = pt_match.group(1).strip() if pt_match else ''
+            # If AID gives no useful product type, try VAN
+            if not product_type and van:
+                pt_van = re.match(r'^(.+?)\s+-\s*', nz(van))
+                product_type = pt_van.group(1).strip() if pt_van else ''
+
+            if product_type and design and color:
+                val = f'{product_type} - {design} - {color}'
+            elif design and color:
+                val = f'{design} - {color}'
+            elif design:
+                val = design
+            else:
+                val = inn_key(iname)
 
     # SOL锟斤拷ITE and VYAM锟斤拷S: AID is the reliable key regardless of FINAL_KEY encoding
     if 'SOL' in brand.upper() and 'ITE' in brand.upper():
@@ -346,7 +369,10 @@ def make_style_id_base(brand, aid, van, iname):
     design_raw = nz(van) if van else ''
     if not design_raw:
         design_raw = parts[4].strip() if len(parts) >= 5 else nz(aid)
-    color_raw = parts[-2].strip() if len(parts) >= 3 else (nz(van) or nz(aid))
+    # Use INN [5] for color if available (more reliable than [-2] for structured brands)
+    color_raw = parts[5].strip() if len(parts) >= 6 and parts[5].strip() else ''
+    if not color_raw:
+        color_raw = parts[-2].strip() if len(parts) >= 3 else (nz(van) or nz(aid))
     return f'BW_{prefix}_{sanitize(design_raw,15)}_{sanitize(color_raw,12)}_'
 
 # ─────────────────────────────────────────────────────────────────────────────
