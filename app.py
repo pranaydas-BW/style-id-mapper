@@ -281,10 +281,21 @@ def get_style_key(row):
             val = re.sub(r'\s{2,}', ' ', val).strip()
     else:  # inn
         if brand == 'Instinct First' or brand == 'Instinct first':
-            # AID = "Oversized Tshirt - Black - L" → strip size → "Oversized Tshirt - Black"
-            # Normalise spaces around hyphens to handle "Shirt -Blue" vs "Shirt - Blue"
-            v = strip_size(van, size) if van else strip_size(aid, size)
-            val = re.sub(r'\s*-\s*', ' - ', v).strip().rstrip(' -').strip()
+            # VAN can be either:
+            # (a) "Oversized Tshirt - Black - L" → has color → strip size → "Oversized Tshirt - Black"
+            # (b) "After Hours" / "Metallic" → design only, no color → use INN [4]-[5]
+            v = strip_size(van, size) if van else ''
+            v_norm = re.sub(r'\s*-\s*', ' - ', v).strip().rstrip(' -').strip()
+            van_raw_norm = re.sub(r'\s*-\s*', ' - ', nz(van)).strip()
+            # If stripping size changed the VAN, it had color in it → use VAN key
+            if v_norm and v_norm.lower() != van_raw_norm.lower():
+                val = v_norm
+            else:
+                # VAN is design-only → use INN [4] (design) + [5] (color)
+                parts = nz(iname).split('-')
+                design = parts[4].strip() if len(parts) >= 5 else ''
+                color  = parts[5].strip() if len(parts) >= 6 else ''
+                val = (design + ' - ' + color).strip(' -') if color else (design or v_norm or inn_key(iname))
         else:
             val = inn_key(iname)
 
@@ -299,12 +310,22 @@ def get_style_key(row):
 
 def make_style_id_base(brand, aid, van, iname):
     prefix = brand_prefix(brand)
+    parts  = nz(iname).split('-')
+
+    # For Instinct First, design=[4] color=[5] in INN
+    if brand in ('Instinct First', 'Instinct first'):
+        design_raw = parts[4].strip() if len(parts) >= 5 else (nz(van) or nz(aid))
+        color_raw  = parts[5].strip() if len(parts) >= 6 else ''
+        if not color_raw:
+            # VAN has color: "Oversized Tshirt - Black" → last segment
+            v = nz(van).split(' - ')
+            color_raw = v[-1].strip() if len(v) >= 2 else ''
+        return f'BW_{prefix}_{sanitize(design_raw,15)}_{sanitize(color_raw or "UNK",12)}_'
+
     design_raw = nz(van) if van else ''
     if not design_raw:
-        parts = nz(iname).split('-')
-        design_raw = parts[4].strip() if len(parts)>=5 else nz(aid)
-    parts = nz(iname).split('-')
-    color_raw = parts[-2].strip() if len(parts)>=3 else (nz(van) or nz(aid))
+        design_raw = parts[4].strip() if len(parts) >= 5 else nz(aid)
+    color_raw = parts[-2].strip() if len(parts) >= 3 else (nz(van) or nz(aid))
     return f'BW_{prefix}_{sanitize(design_raw,15)}_{sanitize(color_raw,12)}_'
 
 # ─────────────────────────────────────────────────────────────────────────────
