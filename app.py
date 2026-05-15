@@ -9,11 +9,10 @@ import os
 st.set_page_config(page_title="Style ID Mapper", page_icon="🏷️", layout="wide")
 
 # ─────────────────────────────────────────────────────────────────────────────
-# BRAND → KEY FIELD MAPPING  (data-driven from 1.3L reference)
+# BRAND → KEY FIELD MAPPING
 # ─────────────────────────────────────────────────────────────────────────────
 
 FINAL_KEY = {
-    # INN  — use item_name, strip last -size segment
     '7-10':'inn','AADVEKA':'inn','ACK':'inn','ANNY':'inn','ARKS':'inn',
     'Almost Gods':'inn','Anaar':'inn','Aroop India':'inn','Averie':'inn',
     'BAD LIES':'inn','BADFIT':'inn','BARE BROWN':'inn','Bear House':'inn',
@@ -40,7 +39,6 @@ FINAL_KEY = {
     'Western Era':'inn','WomanLikeU':'inn','Xaya':'inn','ZORI WORLD':'inn',
     'bare wear':'inn','hexafun':'inn','sorta':'inn',
     'ATBW':'inn','Aakar Taro':'inn','LVL99':'inn','Love Pangolin':'inn',
-    # VAN  — use vendor_article_name, strip trailing size
     'ARISTOBRAT':'van','Aaina Sleepwear':'van','Aer':'van','Aldeno':'van',
     'Around The City':'van','BAWSE':'van','BLCKORCHID':'van','BOOZY BUTTON':'van',
     'Blissclub':'van','Bomaachi':'van','Broke Memers':'van','By The Bay':'van',
@@ -68,9 +66,7 @@ FINAL_KEY = {
     'Tura Turi':'van','Twelve Thirty One':'van','Un Denim':'van',
     'Uptownie':'van','WOOMN':'van','Younglings':'van','Zeesh':'van',
     'Zumee':'van','teeside':'van',
-    '63 East':'van','Auburban':'van','Khushbu Rathod Label':'van',
-    'Natty Garb':'van',
-    # AID  — use vendor_article_id, strip trailing size
+    '63 East':'van','Auburban':'van','Khushbu Rathod Label':'van','Natty Garb':'van',
     'A Toddler Thing':'aid','ARISTA VAULT':'aid','BILABA':'aid',
     'Bird Eye':'aid','Bluer':'aid','Ceya':'aid','Chapter 2':'aid',
     'COLOR CAPITAL':'aid','Duchess Kumari':'aid','ECHO STUDIO':'aid',
@@ -86,7 +82,6 @@ FINAL_KEY = {
 }
 
 SIZE_ALIASES = {'2XL':'XXL','XXL':'2XL','3XL':'XXXL','XXXL':'3XL'}
-
 SIZE_PAT   = re.compile(r'\b(2XS|XS|S|M|L|XL|2XL|3XL|4XL|5XL|6XL|XXL|XXXL|2X|3X)\b', re.I)
 PROD_PAT   = re.compile(r'\b(VALKYRE|JACKET|HOODIE|TEE|T[\-\s]?SHIRT|JEANS)\b', re.I)
 COLOR_PAT  = re.compile(
@@ -96,7 +91,7 @@ COLOR_PAT  = re.compile(
 SEASON_PAT = re.compile(r'\b(WINTER|SUMMER|NA|N/A|SPRING|AUTUMN|FALL|AW|SS|CORE|ARCHIVE)\b', re.I)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# HELPERS
+# PURE-PYTHON KEY LOGIC  (no DB, runs on every row)
 # ─────────────────────────────────────────────────────────────────────────────
 
 def nz(s):
@@ -122,12 +117,9 @@ def strip_size(text, size):
     su = sz.upper()
     if su in SIZE_ALIASES:
         variants.add(SIZE_ALIASES[su])
-    if su == '2XL':
-        variants |= {'XXL', '2XL'}
-    if su == 'XXL':
-        variants |= {'2XL', 'XXL'}
-    if su == '3XL':
-        variants |= {'XXXL', '3XL'}
+    if su == '2XL': variants |= {'XXL','2XL'}
+    if su == 'XXL': variants |= {'2XL','XXL'}
+    if su == '3XL': variants |= {'XXXL','3XL'}
     if sz.isdigit() and len(sz) == 1:
         variants.add('0' + sz)
     for s in variants:
@@ -150,102 +142,76 @@ def valkyre_normalize_design(van):
     return re.sub(r'\s+', ' ', d).strip().lower()
 
 def valkyre_color(aid, iname):
-    aid   = nz(aid)
-    iname = nz(iname)
-    parts = iname.split('-')
+    aid = nz(aid); parts = nz(iname).split('-')
     if aid.startswith('VJAC-'):
         m = re.match(r'VJAC-[^-]+-([A-Z]+)_', aid)
-        if m:
-            return m.group(1).upper()
+        if m: return m.group(1).upper()
         c = parts[-2].strip() if len(parts) >= 3 else ''
-        if c and not SEASON_PAT.match(c.strip()) and c.upper() not in ('NA', 'N/A', ''):
-            return re.sub(r'\s+', '', c).upper()[:8]
+        if c and not SEASON_PAT.match(c) and c.upper() not in ('NA','N/A',''):
+            return re.sub(r'\s+','',c).upper()[:8]
         return 'BLK'
-    if aid.startswith('VALK-'):
-        return 'BLK'
+    if aid.startswith('VALK-'): return 'BLK'
     if len(parts) >= 4:
         c3 = parts[-3].strip()
-        if c3 and not SEASON_PAT.match(c3.strip()) and c3.upper() not in ('NA', 'N/A', ''):
-            return re.sub(r'\s+', '', c3).upper()[:10]
+        if c3 and not SEASON_PAT.match(c3) and c3.upper() not in ('NA','N/A',''):
+            return re.sub(r'\s+','',c3).upper()[:10]
     c2 = parts[-2].strip() if len(parts) >= 3 else ''
-    return re.sub(r'\s+', '', c2).upper()[:8] if c2 and c2.upper() not in ('NA', 'N/A', '') else 'NA'
-
-# ─────────────────────────────────────────────────────────────────────────────
-# CORE KEY FUNCTION
-# ─────────────────────────────────────────────────────────────────────────────
+    return re.sub(r'\s+','',c2).upper()[:8] if c2 and c2.upper() not in ('NA','N/A','') else 'NA'
 
 def get_style_key(row):
-    brand    = nz(row.get('brand_name', ''))
-    aid      = nz(row.get('vendor_article_id', ''))
-    van      = nz(row.get('vendor_article_name', ''))
-    iname    = nz(row.get('item_name', ''))
-    size     = nz(row.get('size', ''))
-    node     = clean(nz(row.get('node', '')))
-    division = clean(nz(row.get('division', '')))
-    section  = clean(nz(row.get('section', '')))
-    dept     = clean(nz(row.get('department', '')))
-    cat_key  = f'{division}|{section}|{dept}|{node}'
+    brand = nz(row.get('brand_name',''))
+    aid   = nz(row.get('vendor_article_id',''))
+    van   = nz(row.get('vendor_article_name',''))
+    iname = nz(row.get('item_name',''))
+    size  = nz(row.get('size',''))
+    cat_key = '|'.join([
+        clean(nz(row.get('division',''))),
+        clean(nz(row.get('section',''))),
+        clean(nz(row.get('department',''))),
+        clean(nz(row.get('node',''))),
+    ])
 
-    # VALKYRE: special multi-format logic
     if brand == 'VALKYRE':
-        design = valkyre_normalize_design(van)
-        color  = valkyre_color(aid, iname)
-        return clean(brand) + '||' + design + '||' + color + '||' + cat_key
+        return clean(brand)+'||'+valkyre_normalize_design(van)+'||'+valkyre_color(aid,iname)+'||'+cat_key
 
     kt = FINAL_KEY.get(brand, 'inn')
-
     if kt == 'aid':
         if brand == 'Hunnit':
-            v2 = re.sub(r'_[^_]+$', '', aid).strip()
-            val = v2 if v2 != aid else strip_size(aid, size)
+            v2 = re.sub(r'_[^_]+$','',aid).strip(); val = v2 if v2!=aid else strip_size(aid,size)
         elif brand == 'NeceSera':
-            v2 = re.sub(r'_[^_]+$', '', aid).strip()
-            val = v2 if v2 != aid else strip_size(aid, size)
+            v2 = re.sub(r'_[^_]+$','',aid).strip(); val = v2 if v2!=aid else strip_size(aid,size)
         elif brand == 'Farda':
-            v2 = re.sub(r'[A-Z]$', '', aid).strip()
-            val = v2 if v2 != aid else strip_size(aid, size)
+            v2 = re.sub(r'[A-Z]$','',aid).strip(); val = v2 if v2!=aid else strip_size(aid,size)
         elif brand == 'Bird Eye':
-            p = aid.split('-')
-            val = '-'.join(p[:2]).strip() if len(p) >= 2 else strip_size(aid, size)
+            p = aid.split('-'); val = '-'.join(p[:2]).strip() if len(p)>=2 else strip_size(aid,size)
         else:
             val = strip_size(aid, size)
-
     elif kt == 'van':
         if brand == 'Theater':
-            v = strip_size(van, size) if van else ''
-            val = re.sub(r'\s+\d{1,2}$', '', v).strip() if v else strip_size(aid, size)
+            v = strip_size(van,size) if van else ''
+            val = re.sub(r'\s+\d{1,2}$','',v).strip() if v else strip_size(aid,size)
         elif brand == 'Ludic':
             v = nz(van)
-            val = re.sub(r'\s+(MEN\s+|WOMEN\s+)?\d{1,3}$', '', v, flags=re.IGNORECASE).strip()
-            val = val if val else v
+            val = re.sub(r'\s+(MEN\s+|WOMEN\s+)?\d{1,3}$','',v,flags=re.IGNORECASE).strip() or v
         else:
-            val = strip_size(van, size) if van else strip_size(aid, size)
-    else:  # inn
+            val = strip_size(van,size) if van else strip_size(aid,size)
+    else:
         val = inn_key(iname)
 
-    return clean(brand) + '||' + clean(val) + '||' + cat_key
+    return clean(brand)+'||'+clean(val)+'||'+cat_key
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STYLE ID GENERATION (brand-aware label)
-# ─────────────────────────────────────────────────────────────────────────────
-
-def make_style_id_label(brand, aid, van, iname, size):
+def make_style_id_base(brand, aid, van, iname):
     prefix = brand_prefix(brand)
-    # Design label
-    if van and not pd.isna(van):
-        design_raw = nz(van)
-    else:
+    design_raw = nz(van) if van else ''
+    if not design_raw:
         parts = nz(iname).split('-')
-        design_raw = parts[4].strip() if len(parts) >= 5 else nz(aid)
-    # Color label
+        design_raw = parts[4].strip() if len(parts)>=5 else nz(aid)
     parts = nz(iname).split('-')
-    color_raw = parts[-2].strip() if len(parts) >= 3 else (nz(van) or nz(aid))
-    dc = sanitize(design_raw, 15)
-    cc = sanitize(color_raw, 12)
-    return f'BW_{prefix}_{dc}_{cc}_'
+    color_raw = parts[-2].strip() if len(parts)>=3 else (nz(van) or nz(aid))
+    return f'BW_{prefix}_{sanitize(design_raw,15)}_{sanitize(color_raw,12)}_'
 
 # ─────────────────────────────────────────────────────────────────────────────
-# DATABASE
+# DATABASE  — single persistent connection, batched queries
 # ─────────────────────────────────────────────────────────────────────────────
 
 @st.cache_resource
@@ -254,113 +220,166 @@ def get_db():
     if not db_url:
         st.error("DATABASE_URL not set.")
         st.stop()
-    return psycopg2.connect(db_url)
+    conn = psycopg2.connect(db_url)
+    conn.autocommit = False
+    return conn
 
-def lookup_style(style_key, conn):
-    cur = conn.cursor()
-    cur.execute("SELECT style_group_id FROM style_map WHERE style_key=%s", (style_key,))
-    r = cur.fetchone()
-    cur.close()
-    return r[0] if r else None
-
-def lookup_key_size(division, section, department, node, size, conn):
-    size_norm = re.sub(r'^(?:UK|EU)\s*', '', nz(size), flags=re.IGNORECASE).strip()
+def batch_lookup_style_keys(style_keys, conn):
+    """Single query: fetch all matching style_keys at once."""
+    if not style_keys:
+        return {}
     cur = conn.cursor()
     cur.execute(
-        """SELECT key_size FROM key_size_map
-           WHERE division=%s AND section=%s AND department=%s AND node=%s AND size=%s""",
-        (nz(division), nz(section), nz(department), nz(node), size_norm))
-    r = cur.fetchone()
+        "SELECT style_key, style_group_id FROM style_map WHERE style_key = ANY(%s)",
+        (list(style_keys),))
+    result = {r[0]: r[1] for r in cur.fetchall()}
     cur.close()
-    if r is None:
-        return ''
-    return '' if r[0] is None else int(r[0])
+    return result
 
-def insert_style(style_key, style_id, brand, conn):
+def batch_lookup_key_sizes(size_tuples, conn):
+    """
+    size_tuples: list of (division, section, department, node, size_norm)
+    Returns dict keyed by tuple → key_size value.
+    """
+    if not size_tuples:
+        return {}
+    unique = list(set(size_tuples))
+    # Build VALUES for unnest
     cur = conn.cursor()
     cur.execute(
+        """SELECT division, section, department, node, size, key_size
+           FROM key_size_map
+           WHERE (division, section, department, node, size) IN %s""",
+        (tuple(unique),))
+    result = {(r[0],r[1],r[2],r[3],r[4]): r[5] for r in cur.fetchall()}
+    cur.close()
+    return result
+
+def fetch_existing_bases(bases, conn):
+    """
+    Given a set of base prefixes, fetch all style_group_ids that start with any of them.
+    Returns dict: base → max_seq (int).
+    """
+    if not bases:
+        return {}
+    # Use LIKE ANY with array — one query
+    cur = conn.cursor()
+    patterns = [b + '%' for b in bases]
+    cur.execute(
+        "SELECT style_group_id FROM style_map WHERE style_group_id LIKE ANY(%s)",
+        (patterns,))
+    rows = cur.fetchall()
+    cur.close()
+    base_max = {}
+    for (sid,) in rows:
+        m = re.match(r'^(BW_[A-Z0-9]+_[A-Z0-9]+_[A-Z0-9]+_)(\d+)$', sid)
+        if m:
+            base = m.group(1)
+            seq  = int(m.group(2))
+            base_max[base] = max(base_max.get(base, 0), seq)
+    return base_max
+
+def batch_insert_styles(new_rows, conn):
+    """Insert all new (style_key, style_id, brand) rows in one executemany."""
+    if not new_rows:
+        return
+    cur = conn.cursor()
+    cur.executemany(
         """INSERT INTO style_map (style_key, style_group_id, brand_name, source)
            VALUES (%s,%s,%s,'generated') ON CONFLICT (style_key) DO NOTHING""",
-        (style_key, style_id, brand))
+        new_rows)
     conn.commit()
     cur.close()
 
-def get_existing_ids_for_base(base, conn):
-    cur = conn.cursor()
-    cur.execute("SELECT style_group_id FROM style_map WHERE style_group_id LIKE %s", (base + '%',))
-    rows = cur.fetchall()
-    cur.close()
-    return [r[0] for r in rows]
-
 # ─────────────────────────────────────────────────────────────────────────────
-# MAIN MAPPING FUNCTION
+# MAIN MAPPING  — all DB work in 3 round-trips regardless of file size
 # ─────────────────────────────────────────────────────────────────────────────
 
-def map_dataframe(df, conn, progress_bar=None, status_text=None):
-    style_ids  = []
-    key_sizes  = []
-    new_cache  = {}   # style_key → style_id (within this session)
-    base_cache = {}   # base_label → next_seq (to avoid DB calls per row)
-    matched = generated = 0
-    total = len(df)
+def map_dataframe(df, conn, progress=None, status=None):
+    if status: status.text("Step 1/4 — computing style keys…")
+    if progress: progress.progress(0.05)
 
-    for i, (_, row) in enumerate(df.iterrows()):
-        if progress_bar is not None:
-            progress_bar.progress((i + 1) / total)
-        if status_text is not None and i % 100 == 0:
-            status_text.text(f"Processing row {i+1:,} of {total:,}…")
+    # ── Step 1: compute all style keys (pure Python, no DB) ──────────────────
+    rows_meta = []
+    for _, row in df.iterrows():
+        brand = nz(row.get('brand_name',''))
+        aid   = nz(row.get('vendor_article_id',''))
+        van   = nz(row.get('vendor_article_name',''))
+        iname = nz(row.get('item_name',''))
+        size  = nz(row.get('size',''))
+        div   = nz(row.get('division',''))
+        sec   = nz(row.get('section',''))
+        dept  = nz(row.get('department',''))
+        node  = nz(row.get('node',''))
+        size_norm = re.sub(r'^(?:UK|EU)\s*','', size, flags=re.IGNORECASE).strip()
+        rows_meta.append({
+            'style_key': get_style_key(row),
+            'base':      make_style_id_base(brand, aid, van, iname),
+            'brand':     brand,
+            'size_tuple': (div, sec, dept, node, size_norm),
+        })
 
-        brand = nz(row.get('brand_name', ''))
-        aid   = nz(row.get('vendor_article_id', ''))
-        van   = nz(row.get('vendor_article_name', ''))
-        iname = nz(row.get('item_name', ''))
-        size  = nz(row.get('size', ''))
-        div   = nz(row.get('division', ''))
-        sec   = nz(row.get('section', ''))
-        dept  = nz(row.get('department', ''))
-        node  = nz(row.get('node', ''))
+    if progress: progress.progress(0.25)
 
-        style_key = get_style_key(row)
+    # ── Step 2: batch fetch all existing style keys (1 query) ────────────────
+    if status: status.text("Step 2/4 — looking up existing style IDs…")
+    all_keys = list({m['style_key'] for m in rows_meta})
+    key_to_sid = batch_lookup_style_keys(all_keys, conn)
 
-        # 1 — check session cache
-        if style_key in new_cache:
-            sid = new_cache[style_key]
-            matched += 1
-        else:
-            # 2 — check DB
-            sid = lookup_style(style_key, conn)
-            if sid:
-                matched += 1
-                new_cache[style_key] = sid
-            else:
-                # 3 — generate new
-                base = make_style_id_label(brand, aid, van, iname, size)
-                if base not in base_cache:
-                    existing = get_existing_ids_for_base(base, conn)
-                    nums = [int(m.group(1)) for s in existing
-                            for m in [re.search(r'_(\d+)$', s)] if m]
-                    base_cache[base] = (max(nums) + 1) if nums else 1
-                seq = base_cache[base]
-                base_cache[base] += 1
-                sid = base + str(seq).zfill(2)
-                insert_style(style_key, sid, brand, conn)
-                new_cache[style_key] = sid
-                generated += 1
+    if progress: progress.progress(0.45)
 
-        style_ids.append(sid)
-        key_sizes.append(lookup_key_size(div, sec, dept, node, size, conn))
+    # ── Step 3: batch fetch key sizes (1 query) ───────────────────────────────
+    if status: status.text("Step 3/4 — looking up key sizes…")
+    all_size_tuples = list({m['size_tuple'] for m in rows_meta})
+    size_map = batch_lookup_key_sizes(all_size_tuples, conn)
+
+    if progress: progress.progress(0.55)
+
+    # ── Step 4: resolve new style IDs (1 query for base sequences) ───────────
+    if status: status.text("Step 4/4 — generating new style IDs…")
+    new_keys  = {m['style_key'] for m in rows_meta if m['style_key'] not in key_to_sid}
+    new_bases = {m['base'] for m in rows_meta if m['style_key'] in new_keys}
+    base_max  = fetch_existing_bases(new_bases, conn) if new_bases else {}
+
+    # Assign new style IDs in memory (no DB per row)
+    base_next  = {b: base_max.get(b, 0) + 1 for b in new_bases}
+    new_inserts = []  # (style_key, style_id, brand)
+
+    for m in rows_meta:
+        sk = m['style_key']
+        if sk not in key_to_sid:
+            base = m['base']
+            seq  = base_next[base]
+            base_next[base] += 1
+            sid = base + str(seq).zfill(2)
+            key_to_sid[sk] = sid
+            new_inserts.append((sk, sid, m['brand']))
+
+    # ── Step 5: batch insert all new rows (1 query) ───────────────────────────
+    batch_insert_styles(new_inserts, conn)
+    if progress: progress.progress(0.90)
+
+    # ── Assemble output ───────────────────────────────────────────────────────
+    style_ids = [key_to_sid[m['style_key']] for m in rows_meta]
+    key_sizes = [size_map.get(m['size_tuple'], '') for m in rows_meta]
 
     df = df.copy()
     df['style_group_id'] = style_ids
     df['key_size']       = key_sizes
-    return df, matched, generated
+
+    matched   = sum(1 for m in rows_meta if m['style_key'] in key_to_sid and
+                    (sk := m['style_key']) not in {r[0] for r in new_inserts})
+    generated = len({r[0] for r in new_inserts})  # unique new keys
+
+    if progress: progress.progress(1.0)
+    return df, len(style_ids) - generated, generated
 
 # ─────────────────────────────────────────────────────────────────────────────
-# FLAGGING (thumb rule: >10 barcodes)
+# FLAGGING
 # ─────────────────────────────────────────────────────────────────────────────
 
 VAN_IS_SIZE_BRANDS = {'Ludic'}
-SOURCE_DATA_BRANDS = {'Averie', 'Blissclub'}
+SOURCE_DATA_BRANDS = {'Averie','Blissclub'}
 
 def flag_over10(df):
     bc = df.groupby('style_group_id')['bar_code'].count()
@@ -373,46 +392,35 @@ def flag_over10(df):
         nodes = sorted(set(nz(n) for n in grp['node'].dropna().unique()))
         sizes = sorted(set(nz(s) for s in grp['size'].dropna().unique()))
         n_van = len(vans); n_node = len(nodes)
-        van_sample = ' | '.join(v[:40] for v in vans[:4])
 
         if n_node > 1:
-            flag = 'WRONG'; reason = f'Multiple nodes: {", ".join(nodes)}'
+            flag='WRONG';   reason=f'Multiple nodes: {", ".join(nodes)}'
         elif brand in VAN_IS_SIZE_BRANDS:
-            flag = 'GENUINE'; reason = f'VAN encodes shoe size — {n_van} sizes'
+            flag='GENUINE'; reason=f'VAN encodes shoe size — {n_van} sizes'
         elif brand in SOURCE_DATA_BRANDS:
-            flag = 'DATA ISSUE'; reason = 'VAN encodes size/collection — source data problem'
+            flag='DATA ISSUE'; reason='VAN encodes size/collection — source data problem'
         elif n_van == 1:
-            if cnt <= 20:
-                flag = 'GENUINE'; reason = f'1 VAN, {len(sizes)} sizes'
-            else:
-                flag = 'DATA ISSUE'; reason = f'1 VAN but {cnt} barcodes — duplicate data'
+            flag = 'GENUINE' if cnt<=20 else 'DATA ISSUE'
+            reason = f'1 VAN, {len(sizes)} sizes' if cnt<=20 else f'1 VAN, {cnt} barcodes — duplicates'
         else:
-            def clearly_different(vlist):
-                cleaned = []
-                for v in vlist:
-                    v2 = re.sub(r'\b(size|xs|s\b|m\b|l\b|xl|2xl|3xl|each|box|packet|set)\b', '', v, flags=re.I)
-                    cleaned.append(re.sub(r'\s+', ' ', v2).strip())
-                for i in range(len(cleaned)):
-                    for j in range(i + 1, len(cleaned)):
-                        a, b = cleaned[i], cleaned[j]
-                        if a in b or b in a:
-                            return False
-                        wa = set(a.split()); wb = set(b.split())
-                        if wa and wb and len(wa & wb) / max(len(wa), len(wb)) > 0.6:
-                            return False
+            def clearly_diff(vlist):
+                cl = [re.sub(r'\b(size|xs|s\b|m\b|l\b|xl|2xl|3xl|each|box|packet|set)\b','',v,flags=re.I).strip() for v in vlist]
+                for i in range(len(cl)):
+                    for j in range(i+1,len(cl)):
+                        a,b = cl[i],cl[j]
+                        if a in b or b in a: return False
+                        wa,wb = set(a.split()),set(b.split())
+                        if wa and wb and len(wa&wb)/max(len(wa),len(wb))>0.6: return False
                 return True
-
-            if clearly_different(vans[:4]):
-                flag = 'WRONG'; reason = f'{n_van} distinct VANs'
+            if clearly_diff(vans[:4]):
+                flag='WRONG';  reason=f'{n_van} distinct VANs'
             else:
-                flag = 'MANUAL'; reason = f'{n_van} VANs — may be variants/typos, needs human review'
+                flag='MANUAL'; reason=f'{n_van} VANs — may be variants/typos'
 
-        rows.append({
-            'style_group_id': sid, 'brand': brand, 'barcodes': cnt,
-            'unique_vans': n_van, 'flag': flag,
-            'reason': reason, 'van_sample': van_sample,
-            'sizes': ', '.join(sizes[:12]),
-        })
+        rows.append({'style_group_id':sid,'brand':brand,'barcodes':cnt,
+                     'unique_vans':n_van,'flag':flag,'reason':reason,
+                     'van_sample':' | '.join(v[:40] for v in vans[:4]),
+                     'sizes':','.join(sizes[:12])})
     return pd.DataFrame(rows)
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -420,29 +428,27 @@ def flag_over10(df):
 # ─────────────────────────────────────────────────────────────────────────────
 
 st.title("🏷️ Style ID Mapper")
-st.caption("Upload a barcode CSV → get Style IDs and Key Sizes mapped using brand-specific key logic.")
+st.caption("Upload a barcode CSV → Style IDs and Key Sizes mapped in seconds.")
 
-# DB stats
 try:
     conn = get_db()
     cur  = conn.cursor()
     cur.execute("SELECT COUNT(DISTINCT style_group_id) FROM style_map")
-    total_styles = cur.fetchone()[0]
+    ts = cur.fetchone()[0]
     cur.execute("SELECT COUNT(DISTINCT brand_name) FROM style_map")
-    total_brands = cur.fetchone()[0]
+    tb = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM key_size_map")
-    total_ks = cur.fetchone()[0]
+    tk = cur.fetchone()[0]
     cur.close()
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Style IDs in DB",   f"{total_styles:,}")
-    c2.metric("Brands in DB",      f"{total_brands:,}")
-    c3.metric("Key size rules",    f"{total_ks:,}")
+    c1,c2,c3 = st.columns(3)
+    c1.metric("Style IDs in DB", f"{ts:,}")
+    c2.metric("Brands in DB",    f"{tb:,}")
+    c3.metric("Key size rules",  f"{tk:,}")
 except Exception as e:
     st.warning(f"DB connection issue: {e}")
 
 st.divider()
 
-# ── Upload ──
 uploaded = st.file_uploader("Drop your CSV here", type=["csv"])
 
 if uploaded:
@@ -457,113 +463,79 @@ if uploaded:
             st.dataframe(df_raw.head(5), use_container_width=True)
 
         if st.button("▶ Map Style IDs", type="primary"):
-            progress_bar = st.progress(0)
-            status_text  = st.empty()
+            progress = st.progress(0.0)
+            status   = st.empty()
 
-            conn = get_db()
-            result, matched, generated = map_dataframe(
-                df_raw, conn, progress_bar, status_text)
-            progress_bar.progress(1.0)
-            status_text.empty()
+            conn    = get_db()
+            result, matched, generated = map_dataframe(df_raw, conn, progress, status)
+            status.empty()
 
             st.success(
                 f"Done! **{matched:,}** matched from DB · "
                 f"**{generated:,}** new Style IDs generated · "
                 f"**{result['style_group_id'].nunique():,}** unique style IDs total")
 
-            # ── Thumb-rule check ──
             bc = result.groupby('style_group_id')['bar_code'].count()
-            st.divider()
-            m1, m2, m3, m4 = st.columns(4)
-            m1.metric("Total style IDs",  result['style_group_id'].nunique())
+            m1,m2,m3,m4 = st.columns(4)
+            m1.metric("Unique style IDs", result['style_group_id'].nunique())
             m2.metric("Median barcodes",  int(bc.median()))
-            m3.metric("Styles >10 bc",    int((bc > 10).sum()))
-            m4.metric("Styles >15 bc",    int((bc > 15).sum()))
+            m3.metric("Styles >10 bc",    int((bc>10).sum()))
+            m4.metric("Styles >15 bc",    int((bc>15).sum()))
 
-            # ── Flag table ──
             flag_df = flag_over10(result)
             if len(flag_df):
                 st.subheader(f"Styles with >10 barcodes — {len(flag_df)} flagged")
-                FLAG_COLORS = {
-                    'GENUINE':    '🟢',
-                    'DATA ISSUE': '🟡',
-                    'WRONG':      '🔴',
-                    'MANUAL':     '🔵',
-                }
-                flag_df['icon'] = flag_df['flag'].map(FLAG_COLORS)
+                ICONS = {'GENUINE':'🟢','DATA ISSUE':'🟡','WRONG':'🔴','MANUAL':'🔵'}
                 counts = flag_df['flag'].value_counts()
-                cc1, cc2, cc3, cc4 = st.columns(4)
-                cc1.metric("🟢 Genuine",    counts.get('GENUINE', 0))
-                cc2.metric("🟡 Data issue", counts.get('DATA ISSUE', 0))
-                cc3.metric("🔴 Wrong",      counts.get('WRONG', 0))
-                cc4.metric("🔵 Manual",     counts.get('MANUAL', 0))
+                cc1,cc2,cc3,cc4 = st.columns(4)
+                cc1.metric("🟢 Genuine",    counts.get('GENUINE',0))
+                cc2.metric("🟡 Data issue", counts.get('DATA ISSUE',0))
+                cc3.metric("🔴 Wrong",      counts.get('WRONG',0))
+                cc4.metric("🔵 Manual",     counts.get('MANUAL',0))
 
-                filter_col1, filter_col2 = st.columns([1, 3])
-                flag_filter  = filter_col1.selectbox(
-                    "Filter by flag", ['All'] + list(FLAG_COLORS.keys()))
-                brand_filter = filter_col2.selectbox(
-                    "Filter by brand", ['All'] + sorted(flag_df['brand'].unique().tolist()))
-
+                f1,f2 = st.columns([1,3])
+                ff = f1.selectbox("Filter flag",  ['All']+list(ICONS.keys()))
+                bf = f2.selectbox("Filter brand", ['All']+sorted(flag_df['brand'].unique().tolist()))
                 view = flag_df.copy()
-                if flag_filter != 'All':
-                    view = view[view['flag'] == flag_filter]
-                if brand_filter != 'All':
-                    view = view[view['brand'] == brand_filter]
-
-                st.dataframe(
-                    view[['icon', 'brand', 'style_group_id', 'barcodes',
-                           'unique_vans', 'reason', 'van_sample']].rename(
-                        columns={'icon': '', 'brand': 'Brand',
-                                 'style_group_id': 'Style ID', 'barcodes': 'BCs',
-                                 'unique_vans': 'VANs', 'reason': 'Reason',
-                                 'van_sample': 'VAN sample'}),
+                if ff != 'All': view = view[view['flag']==ff]
+                if bf != 'All': view = view[view['brand']==bf]
+                view[''] = view['flag'].map(ICONS)
+                st.dataframe(view[['','brand','style_group_id','barcodes',
+                                   'unique_vans','reason','van_sample']].rename(
+                    columns={'brand':'Brand','style_group_id':'Style ID',
+                             'barcodes':'BCs','unique_vans':'VANs',
+                             'reason':'Reason','van_sample':'VAN sample'}),
                     use_container_width=True, hide_index=True)
 
-            # ── Full result preview ──
             st.divider()
             st.subheader("Result preview")
-            display_cols = ['bar_code', 'brand_name', 'vendor_article_id',
-                            'vendor_article_name', 'item_name', 'size',
-                            'style_group_id', 'key_size']
-            display_cols = [c for c in display_cols if c in result.columns]
-            st.dataframe(result[display_cols].head(100), use_container_width=True)
+            disp = [c for c in ['bar_code','brand_name','vendor_article_id',
+                                 'vendor_article_name','item_name','size',
+                                 'style_group_id','key_size'] if c in result.columns]
+            st.dataframe(result[disp].head(100), use_container_width=True)
 
-            # ── Downloads ──
-            dl1, dl2 = st.columns(2)
-            buf = io.StringIO()
-            result.to_csv(buf, index=False)
-            dl1.download_button(
-                "⬇ Download mapped CSV",
-                data=buf.getvalue(),
-                file_name="mapped_output.csv",
-                mime="text/csv")
-
+            d1,d2 = st.columns(2)
+            buf = io.StringIO(); result.to_csv(buf, index=False)
+            d1.download_button("⬇ Download mapped CSV", buf.getvalue(),
+                               "mapped_output.csv", "text/csv")
             if len(flag_df):
-                buf2 = io.StringIO()
-                flag_df.drop(columns=['icon'], errors='ignore').to_csv(buf2, index=False)
-                dl2.download_button(
-                    "⬇ Download flag report",
-                    data=buf2.getvalue(),
-                    file_name="flagged_over10.csv",
-                    mime="text/csv")
+                buf2 = io.StringIO(); flag_df.to_csv(buf2, index=False)
+                d2.download_button("⬇ Download flag report", buf2.getvalue(),
+                                   "flagged_over10.csv", "text/csv")
 
     except Exception as e:
         st.error(f"Error: {e}")
-        import traceback
-        st.code(traceback.format_exc())
+        import traceback; st.code(traceback.format_exc())
 
-# ── Brand key reference ──
 st.divider()
 with st.expander("📋 Brand → Key field reference"):
-    brand_ref = pd.DataFrame([
-        {'Brand': b, 'Key field': k.upper(),
-         'Logic': {'inn': 'item_name (strip last -size segment)',
-                   'van': 'vendor_article_name (strip trailing size)',
-                   'aid': 'vendor_article_id (strip trailing size)'}[k]}
-        for b, k in sorted(FINAL_KEY.items())
-    ] + [{'Brand': 'VALKYRE', 'Key field': 'VALKYRE',
-          'Logic': 'Special: design from VAN + color from AID format'}])
-    kt_filter = st.selectbox("Filter by key type", ['All', 'INN', 'VAN', 'AID', 'VALKYRE'])
-    if kt_filter != 'All':
-        brand_ref = brand_ref[brand_ref['Key field'] == kt_filter]
+    brand_ref = pd.DataFrame(
+        [{'Brand':b,'Key':k.upper(),
+          'Logic':{'inn':'item_name (strip last -size)','van':'vendor_article_name (strip size)',
+                   'aid':'vendor_article_id (strip size)'}[k]}
+         for b,k in sorted(FINAL_KEY.items())]
+        + [{'Brand':'VALKYRE','Key':'VALKYRE',
+            'Logic':'design from VAN + color from AID format'}])
+    kt = st.selectbox("Filter", ['All','INN','VAN','AID','VALKYRE'])
+    if kt != 'All': brand_ref = brand_ref[brand_ref['Key']==kt]
     st.dataframe(brand_ref, use_container_width=True, hide_index=True)
