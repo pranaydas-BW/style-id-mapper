@@ -27,7 +27,7 @@ FINAL_KEY = {
     'Esthreall':'inn','Exhale Label':'inn','FLAWS':'inn',
     'Gully Labs':'inn','HEEL YOUR SOLE':'inn',
     'Hamptons':'inn','House Of Mae':'inn','Huemn':'inn',
-    'Instinct First':'van','Instinct first':'van','JulietIsDead':'inn',
+    'Instinct First':'inn','Instinct first':'inn','JulietIsDead':'inn',
     'Kingdom of White':'inn','Label Ishnya':'inn','Life & Jam':'inn',
     'MAGRE':'inn','MANACA':'inn','Masha':'inn','Misnomer':'inn',
     'Mokobara':'inn','Nasher Miles':'inn','Nobero':'inn','Nona':'inn',
@@ -281,21 +281,13 @@ def get_style_key(row):
             val = re.sub(r'\s{2,}', ' ', val).strip()
     else:  # inn
         if brand == 'Instinct First' or brand == 'Instinct first':
-            # VAN can be either:
-            # (a) "Oversized Tshirt - Black - L" → has color → strip size → "Oversized Tshirt - Black"
-            # (b) "After Hours" / "Metallic" → design only, no color → use INN [4]-[5]
-            v = strip_size(van, size) if van else ''
-            v_norm = re.sub(r'\s*-\s*', ' - ', v).strip().rstrip(' -').strip()
-            van_raw_norm = re.sub(r'\s*-\s*', ' - ', nz(van)).strip()
-            # If stripping size changed the VAN, it had color in it → use VAN key
-            if v_norm and v_norm.lower() != van_raw_norm.lower():
-                val = v_norm
-            else:
-                # VAN is design-only → use INN [4] (design) + [5] (color)
-                parts = nz(iname).split('-')
-                design = parts[4].strip() if len(parts) >= 5 else ''
-                color  = parts[5].strip() if len(parts) >= 6 else ''
-                val = (design + ' - ' + color).strip(' -') if color else (design or v_norm or inn_key(iname))
+            # INN = "Instinct First-Unisex-Topwear-Tshirts-After Hours-Black--L"
+            # design=[4], color=[5] — the only reliable consistent key across all batches
+            # VAN alternates between design name, color word, and typos — cannot be trusted
+            parts = nz(iname).split('-')
+            design = parts[4].strip() if len(parts) >= 5 else ''
+            color  = parts[5].strip() if len(parts) >= 6 else ''
+            val = (design + ' - ' + color).strip(' -') if color else (design or inn_key(iname))
         else:
             val = inn_key(iname)
 
