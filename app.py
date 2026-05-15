@@ -281,13 +281,29 @@ def get_style_key(row):
             val = re.sub(r'\s{2,}', ' ', val).strip()
     else:  # inn
         if brand == 'Instinct First' or brand == 'Instinct first':
-            # INN = "Instinct First-Unisex-Topwear-Tshirts-After Hours-Black--L"
-            # design=[4], color=[5] — the only reliable consistent key across all batches
-            # VAN alternates between design name, color word, and typos — cannot be trusted
+            # Key = product_type (from AID before first " - ") + design (INN[4]) + color (INN[5])
+            # AID = "Oversized Tshirt - Black - L" → product_type = "Oversized Tshirt"
+            # INN = "...-Stranger Instinct-Black--L" → design="Stranger Instinct", color="Black"
+            a = nz(aid)
+            # Extract product type: everything before the first " - " or " -"
+            pt_match = re.match(r'^(.+?)\s+-\s*', a)
+            product_type = pt_match.group(1).strip() if pt_match else ''
+            # Normalise common typos
+            product_type = re.sub(r'Fulsleeve', 'Fullsleeve', product_type, flags=re.I)
+            product_type = re.sub(r'Oversized\s+T\s+shirt', 'Oversized Tshirt', product_type, flags=re.I)
+            product_type = re.sub(r'Shirts?\b', 'Shirt', product_type, flags=re.I)
+            product_type = re.sub(r'Shorts?\b', 'Short', product_type, flags=re.I)
+            product_type = re.sub(r'Sleeveless\s+T-shirt', 'Sleeveless Tshirt', product_type, flags=re.I)
+            # INN design + color
             parts = nz(iname).split('-')
             design = parts[4].strip() if len(parts) >= 5 else ''
             color  = parts[5].strip() if len(parts) >= 6 else ''
-            val = (design + ' - ' + color).strip(' -') if color else (design or inn_key(iname))
+            if product_type and design and color:
+                val = f'{product_type} - {design} - {color}'
+            elif design and color:
+                val = f'{design} - {color}'
+            else:
+                val = inn_key(iname)
         else:
             val = inn_key(iname)
 
@@ -304,15 +320,19 @@ def make_style_id_base(brand, aid, van, iname):
     prefix = brand_prefix(brand)
     parts  = nz(iname).split('-')
 
-    # For Instinct First, design=[4] color=[5] in INN
+    # For Instinct First, label = product_type + design + color from INN
     if brand in ('Instinct First', 'Instinct first'):
-        design_raw = parts[4].strip() if len(parts) >= 5 else (nz(van) or nz(aid))
+        a = nz(aid)
+        pt_match = re.match(r'^(.+?)\s+-\s*', a)
+        product_type = pt_match.group(1).strip() if pt_match else ''
+        product_type = re.sub(r'Fulsleeve','Fullsleeve',product_type,flags=re.I)
+        product_type = re.sub(r'Oversized\s+T\s+shirt','Oversized Tshirt',product_type,flags=re.I)
+        product_type = re.sub(r'Shirts?\b','Shirt',product_type,flags=re.I)
+        product_type = re.sub(r'Shorts?\b','Short',product_type,flags=re.I)
+        design_raw = parts[4].strip() if len(parts) >= 5 else ''
         color_raw  = parts[5].strip() if len(parts) >= 6 else ''
-        if not color_raw:
-            # VAN has color: "Oversized Tshirt - Black" → last segment
-            v = nz(van).split(' - ')
-            color_raw = v[-1].strip() if len(v) >= 2 else ''
-        return f'BW_{prefix}_{sanitize(design_raw,15)}_{sanitize(color_raw or "UNK",12)}_'
+        label_design = (product_type + ' ' + design_raw).strip() if product_type else design_raw
+        return f'BW_{prefix}_{sanitize(label_design,15)}_{sanitize(color_raw or "UNK",12)}_'
 
     design_raw = nz(van) if van else ''
     if not design_raw:
