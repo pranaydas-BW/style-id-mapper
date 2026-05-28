@@ -1,0 +1,1082 @@
+Division,Section,Department,Node,Size,Key Size = 1
+Clothing,Men,Bottomwear,Trousers,34,1
+Clothing,Men,Bottomwear,Trousers,32,1
+Clothing,Men,Bottomwear,Trousers,36,1
+Clothing,Men,Bottomwear,Jeans,32,1
+Clothing,Men,Bottomwear,Trousers,30,0
+Clothing,Men,Bottomwear,Joggers,M,1
+Clothing,Men,Bottomwear,Jeans,34,1
+Clothing,Men,Bottomwear,Joggers,L,1
+Clothing,Men,Bottomwear,Joggers,S,0
+Clothing,Men,Bottomwear,Joggers,XL,1
+Clothing,Men,Bottomwear,Jeans,36,1
+Clothing,Men,Bottomwear,Trousers,38,0
+Clothing,Men,Bottomwear,Jeans,30,0
+Clothing,Men,Bottomwear,Shorts,34,1
+Clothing,Men,Bottomwear,Trousers,L,1
+Clothing,Men,Bottomwear,Shorts,32,1
+Clothing,Men,Bottomwear,Shorts,36,1
+Clothing,Men,Bottomwear,Trousers,XL,1
+Clothing,Men,Bottomwear,Jeans,38,0
+Clothing,Men,Bottomwear,Trousers,M,1
+Clothing,Men,Bottomwear,Jeans,28,0
+Clothing,Men,Bottomwear,Joggers,32,1
+Clothing,Men,Bottomwear,Shorts,L,1
+Clothing,Men,Bottomwear,Shorts,M,1
+Clothing,Men,Bottomwear,Cargo Trousers,XL,1
+Clothing,Men,Bottomwear,Lounge Pants,30,0
+Clothing,Men,Bottomwear,Shorts,30,0
+Clothing,Men,Bottomwear,Trousers,40,0
+Clothing,Men,Bottomwear,Trousers,42,0
+Clothing,Men,Bottomwear,Trousers,XXL,0
+Clothing,Men,Bottomwear,Joggers,34,1
+Clothing,Men,Bottomwear,Lounge Pants,M,1
+Clothing,Men,Bottomwear,Shorts,S,0
+Clothing,Men,Bottomwear,Track Pants,M,1
+Clothing,Men,Bottomwear,Jeans,31,0
+Clothing,Men,Bottomwear,Jeans,XXL,0
+Clothing,Men,Bottomwear,Joggers,30,0
+Clothing,Men,Bottomwear,Joggers,38,0
+Clothing,Men,Bottomwear,Lounge Pants,42,0
+Clothing,Men,Bottomwear,Shorts,28,0
+Clothing,Men,Bottomwear,Shorts,38,0
+Clothing,Men,Bottomwear,Shorts,XL,1
+Clothing,Men,Bottomwear,Track Pants,XL,1
+Clothing,Men,Bottomwear,Trousers,28,0
+Clothing,Men,Bottomwear,Trousers,XS,0
+Clothing,Men,Bottomwear,Cargo Trousers,32,1
+Clothing,Men,Bottomwear,Cargo Trousers,34,1
+Clothing,Men,Bottomwear,Cargo Trousers,36,1
+Clothing,Men,Bottomwear,Cargo Trousers,L,1
+Clothing,Men,Bottomwear,Cargo Trousers,M,1
+Clothing,Men,Bottomwear,Cargo Trousers,S,0
+Clothing,Men,Bottomwear,Jeans,L,1
+Clothing,Men,Bottomwear,Lounge Pants,32,1
+Clothing,Men,Innerwear,BOXERS,XL,1
+Clothing,Men,Innerwear,BOXERS,XXL,0
+Clothing,Men,Innerwear,Briefs,XL,1
+Clothing,Men,Innerwear,Briefs,XXL,0
+Clothing,Men,Innerwear,Trunk,XL,1
+Clothing,Men,Innerwear,Trunk,XXL,0
+Clothing,Men,Innerwear,Vests,XL,1
+Clothing,Men,Innerwear,Vests,XS,0
+Clothing,Men,Innerwear,Vests,XXL,0
+Clothing,Men,Topwear,Shirt,M,1
+Clothing,Men,Topwear,Tshirts,L,1
+Clothing,Men,Topwear,Tshirts,M,1
+Clothing,Men,Topwear,Shirt,L,1
+Clothing,Men,Topwear,Shirt,XL,1
+Clothing,Men,Topwear,Tshirts,XL,1
+Clothing,Men,Topwear,Tshirts,S,0
+Clothing,Men,Topwear,Shirt,S,0
+Clothing,Men,Topwear,Shirt,42,1
+Clothing,Men,Topwear,Shirt,40,1
+Clothing,Men,Topwear,Shirt,44,1
+Clothing,Men,Topwear,Shirt,XXL,0
+Clothing,Men,Topwear,Tshirts,XXL,0
+Clothing,Men,Topwear,Shirt,39,0
+Clothing,Men,Topwear,Shirt,46,0
+Clothing,Men,Topwear,Shirt,XS,0
+Clothing,Men,Topwear,T-Shirts,L,1
+Clothing,Men,Topwear,Kurtas,44,0
+Clothing,Men,Topwear,Shirts,S,0
+Clothing,Men,Topwear,Sweatshirts,L,1
+Clothing,Men,Topwear,Kurtas,40,0
+Clothing,Men,Topwear,Kurtas,42,0
+Clothing,Men,Topwear,Kurtas,46,0
+Clothing,Men,Topwear,Shirt,XXXL,0
+Clothing,Men,Topwear,Tshirts,3XL,0
+Clothing,Men,Topwear,Co-Ords,L,1
+Clothing,Men,Topwear,Shirt,3XL,0
+Clothing,Men,Topwear,T-Shirts,XL,1
+Clothing,Men,Topwear,Co-Ords,M,1
+Clothing,Men,Topwear,T-Shirts,XS,0
+Clothing,Men,Topwear,Tshirts,XS,0
+Clothing,Men,Topwear,Shackets,S,0
+Clothing,Men,Topwear,Sweaters,L,1
+Clothing,Men,Topwear,Sweaters,M,1
+Clothing,Men,Topwear,Sweatshirts,M,1
+Clothing,Men,Topwear,T-Shirts,M,1
+Clothing,Men,Topwear,Co-Ords,XL,1
+Clothing,Men,Topwear,Shackets,XXL,0
+Clothing,Men,Topwear,Shapewear,XL,1
+Clothing,Men,Topwear,Sweatshirts,XL,1
+Clothing,Men,Topwear,Tshirts,XXXL,0
+Clothing,Men,Topwear,Co-Ords,S,0
+Clothing,Men,Topwear,Shackets,L,1
+Clothing,Men,Topwear,Shapewear,M,1
+Clothing,Men,Topwear,T-Shirts,S,0
+Clothing,Men,Topwear,Kurtas,39,0
+Clothing,Men,Topwear,Lounge Tshirts,XL,1
+Clothing,Men,Topwear,Shackets,XL,1
+Clothing,Men,Topwear,Shirts,XL,1
+Clothing,Men,Topwear,Sweaters,XL,1
+Clothing,Men,Topwear,Tshirts,Onesize,0
+Clothing,Men,Topwear,Shackets,M,1
+Clothing,Men,Topwear,Shapewear,L,1
+Clothing,Men,Topwear,Shirts,M,1
+Clothing,Men,Topwear,Sweaters,S,0
+Clothing,Men,Topwear,Blazers,38,0
+Clothing,Men,Topwear,Blazers,40,1
+Clothing,Men,Topwear,Blazers,42,1
+Clothing,Men,Topwear,Blazers,44,1
+Clothing,Men,Topwear,Blazers,46,0
+Clothing,Men,Topwear,Co-Ords,3XL,0
+Clothing,Men,Topwear,Co-Ords,XXL,0
+Clothing,Men,Topwear,Jackets,38,0
+Clothing,Men,Topwear,Jackets,40,1
+Clothing,Men,Topwear,Jackets,42,1
+Clothing,Men,Topwear,Jackets,44,1
+Clothing,Men,Topwear,Jackets,46,0
+Clothing,Men,Topwear,Jackets,3XL,0
+Clothing,Men,Topwear,Jackets,XL,1
+Clothing,Men,Topwear,Jackets,XS,0
+Clothing,Men,Topwear,Jackets,XXL,0
+Clothing,Men,Bottomwear,Lounge Pants,34,1
+Clothing,Men,Bottomwear,Lounge Pants,36,1
+Clothing,Men,Bottomwear,Lounge Pants,L,1
+Clothing,Men,Bottomwear,Lounge Shorts,32,1
+Clothing,Men,Bottomwear,Lounge Shorts,34,1
+Clothing,Men,Bottomwear,Track Pants,36,1
+Clothing,Men,Bottomwear,Cargo Trousers,30,0
+Clothing,Men,Bottomwear,Cargo Trousers,38,0
+Clothing,Men,Bottomwear,Jeans,26,0
+Clothing,Men,Bottomwear,Jeans,33,0
+Clothing,Men,Bottomwear,Jeans,40,0
+Clothing,Men,Bottomwear,Jeans,42,0
+Clothing,Men,Bottomwear,Jeans,XL,1
+Clothing,Men,Bottomwear,Joggers,28,0
+Clothing,Men,Bottomwear,Joggers,3XL,0
+Clothing,Men,Bottomwear,Joggers,XXL,0
+Clothing,Men,Bottomwear,Joggers,XXXL,0
+Clothing,Men,Bottomwear,Lounge Pants,28,0
+Clothing,Men,Bottomwear,Lounge Pants,38,0
+Clothing,Men,Bottomwear,Lounge Pants,40,0
+Clothing,Men,Bottomwear,Lounge Pants,XL,1
+Clothing,Men,Bottomwear,Lounge Pants,XS,0
+Clothing,Men,Bottomwear,Lounge Pants,XXL,0
+Clothing,Men,Bottomwear,Lounge Shorts,XL,1
+Clothing,Men,Bottomwear,Shorts,40,0
+Clothing,Men,Bottomwear,Shorts,XS,0
+Clothing,Men,Bottomwear,Shorts,XXL,0
+Clothing,Men,Bottomwear,SWEATSHIRT BLACK XL,XL,1
+Clothing,Men,Bottomwear,Track Pants,28,0
+Clothing,Men,Bottomwear,Track Pants,30,0
+Clothing,Men,Bottomwear,Track Pants,38,0
+Clothing,Men,Bottomwear,Track Pants,XS,0
+Clothing,Men,Bottomwear,Track Pants,XXL,0
+Clothing,Men,Bottomwear,Trousers,XXXL,0
+Clothing,Men,Bottomwear,,30,0
+Clothing,Men,Bottomwear,Jeans,M,1
+Clothing,Men,Bottomwear,Jeans,S,0
+Clothing,Men,Bottomwear,Joggers,36,1
+Clothing,Men,Bottomwear,Lounge Pants,S,0
+Clothing,Men,Bottomwear,Lounge Shorts,L,1
+Clothing,Men,Bottomwear,Lounge Shorts,M,1
+Clothing,Men,Bottomwear,Lounge Shorts,S,0
+Clothing,Men,Bottomwear,SWEATSHIRT BLACK M,M,1
+Clothing,Men,Bottomwear,Track Pants,32,1
+Clothing,Men,Bottomwear,Track Pants,34,1
+Clothing,Men,Bottomwear,Track Pants,L,1
+Clothing,Men,Bottomwear,Track Pants,S,0
+Clothing,Men,Bottomwear,Tracksuits,L,1
+Clothing,Men,Bottomwear,Trousers,S,0
+Clothing,Men,Bottomwear,,32,1
+Clothing,Men,Bottomwear,,34,1
+Clothing,Men,Innerwear,BOXERS,36,1
+Clothing,Men,Innerwear,Briefs,36,1
+Clothing,Men,Innerwear,Trunk,36,1
+Clothing,Men,Topwear,Kurtas,48,0
+Clothing,Men,Topwear,Kurtas,XL,1
+Clothing,Men,Topwear,Kurtas,XS,0
+Clothing,Men,Topwear,Kurtas,XXL,0
+Clothing,Men,Topwear,Lounge Tshirts,XS,0
+Clothing,Men,Topwear,Nehru Jackets,38,0
+Clothing,Men,Topwear,Nehru Jackets,40,1
+Clothing,Men,Topwear,Nehru Jackets,42,1
+Clothing,Men,Topwear,Nehru Jackets,44,1
+Clothing,Men,Topwear,Shackets,38,0
+Clothing,Men,Topwear,Shackets,40,1
+Clothing,Men,Topwear,Shackets,42,1
+Clothing,Men,Topwear,Shackets,44,1
+Clothing,Men,Topwear,Shackets,46,0
+Clothing,Men,Topwear,Shackets,2XL,0
+Clothing,Men,Topwear,Shapewear,XXL,0
+Clothing,Men,Topwear,Shirt,38,0
+Clothing,Men,Topwear,Shirt,Onesize,0
+Clothing,Men,Topwear,Shirts,XS,0
+Clothing,Men,Topwear,Sweaters,XS,0
+Clothing,Men,Topwear,Sweaters,XXL,0
+Clothing,Men,Topwear,Sweatshirts,3XL,0
+Clothing,Men,Topwear,Sweatshirts,XS,0
+Clothing,Men,Topwear,Sweatshirts,XXL,0
+Clothing,Men,Topwear,Blazers,36,1
+Clothing,Men,Topwear,Jackets,L,1
+Clothing,Men,Topwear,Jackets,M,1
+Clothing,Men,Topwear,Jackets,S,0
+Clothing,Men,Topwear,Jumpsuits,L,1
+Clothing,Men,Topwear,Jumpsuits,M,1
+Clothing,Men,Topwear,Jumpsuits,S,0
+Clothing,Men,Topwear,Kurtas,L,1
+Clothing,Men,Topwear,Kurtas,M,1
+Clothing,Men,Topwear,Kurtas,S,0
+Clothing,Men,Topwear,Lounge Tshirts,L,1
+Clothing,Men,Topwear,Lounge Tshirts,M,1
+Clothing,Men,Topwear,Lounge Tshirts,S,0
+Clothing,Men,Topwear,Shapewear,S,0
+Clothing,Men,Topwear,Shirt,Small (S) 38 Medium (M) 40 Large (L) 42 Xtra Large (XL) 44 XXL 46,1
+Clothing,Men,Topwear,Shirts,L,1
+Clothing,Men,Topwear,Sweatshirts,S,0
+Clothing,Men,Topwear,Tshirts,36,1
+Clothing,Unisex,Bottomwear,Capris,Free Size,0
+Clothing,Unisex,Bottomwear,Cargo Trousers,28,1
+Clothing,Unisex,Bottomwear,Cargo Trousers,30,1
+Clothing,Unisex,Bottomwear,Cargo Trousers,32,1
+Clothing,Unisex,Bottomwear,Cargo Trousers,34,0
+Clothing,Unisex,Bottomwear,Cargo Trousers,L,1
+Clothing,Unisex,Bottomwear,Cargo Trousers,M,1
+Clothing,Unisex,Bottomwear,Cargo Trousers,S,1
+Clothing,Unisex,Bottomwear,Cargo Trousers,XL,0
+Clothing,Unisex,Bottomwear,Cargo Trousers,XS,0
+Clothing,Unisex,Bottomwear,Cargo Trousers,XXL,0
+Clothing,Unisex,Bottomwear,Clothing,L,1
+Clothing,Unisex,Bottomwear,Clothing,M,1
+Clothing,Unisex,Bottomwear,Clothing,S,1
+Clothing,Unisex,Bottomwear,Clothing,XL,0
+Clothing,Unisex,Bottomwear,Clothing,XS,0
+Clothing,Unisex,Bottomwear,Clothing,XXL,0
+Clothing,Unisex,Bottomwear,Jeans,28,1
+Clothing,Unisex,Bottomwear,Jeans,29,0
+Clothing,Unisex,Bottomwear,Jeans,29.5,0
+Clothing,Unisex,Bottomwear,Jeans,30,1
+Clothing,Unisex,Bottomwear,Jeans,31,0
+Clothing,Unisex,Bottomwear,Jeans,31.5,0
+Clothing,Unisex,Bottomwear,Jeans,32,1
+Clothing,Unisex,Bottomwear,Jeans,33,0
+Clothing,Unisex,Bottomwear,Jeans,34,0
+Clothing,Unisex,Bottomwear,Jeans,35.5,0
+Clothing,Unisex,Bottomwear,Jeans,36,0
+Clothing,Unisex,Bottomwear,Jeans,38,0
+Clothing,Unisex,Bottomwear,Jeans,26-28,0
+Clothing,Unisex,Bottomwear,Jeans,2XL-31-34,0
+Clothing,Unisex,Bottomwear,Jeans,2XL-33-34,0
+Clothing,Unisex,Bottomwear,Jeans,2XL-34,0
+Clothing,Unisex,Bottomwear,Jeans,30-32,0
+Clothing,Unisex,Bottomwear,Jeans,34-36,0
+Clothing,Unisex,Bottomwear,Jeans,3XL-32-35,0
+Clothing,Unisex,Bottomwear,Jeans,3XL-35.5,0
+Clothing,Unisex,Bottomwear,Jeans,3XL-36,0
+Clothing,Unisex,Bottomwear,Jeans,L,1
+Clothing,Unisex,Bottomwear,Jeans,L-28-31,1
+Clothing,Unisex,Bottomwear,Jeans,L-30,1
+Clothing,Unisex,Bottomwear,Jeans,L-31,1
+Clothing,Unisex,Bottomwear,Jeans,L-31.5,1
+Clothing,Unisex,Bottomwear,Jeans,L-32,1
+Clothing,Unisex,Bottomwear,Jeans,L-34,1
+Clothing,Unisex,Bottomwear,Jeans,M,1
+Clothing,Unisex,Bottomwear,Jeans,M-28,1
+Clothing,Unisex,Bottomwear,Jeans,M-29,1
+Clothing,Unisex,Bottomwear,Jeans,M-29.5,1
+Clothing,Unisex,Bottomwear,Jeans,M-32,1
+Clothing,Unisex,Bottomwear,Jeans,S,1
+Clothing,Unisex,Bottomwear,Jeans,S-28,1
+Clothing,Unisex,Bottomwear,Jeans,XL,0
+Clothing,Unisex,Bottomwear,Jeans,XL-30-33,0
+Clothing,Unisex,Bottomwear,Jeans,XL-32,0
+Clothing,Unisex,Bottomwear,Jeans,XL-33,0
+Clothing,Unisex,Bottomwear,Jeans,XL-34,0
+Clothing,Unisex,Bottomwear,Jeans,XL-36,0
+Clothing,Unisex,Bottomwear,Jeans,XS,0
+Clothing,Unisex,Bottomwear,Jeans,XXL,0
+Clothing,Unisex,Bottomwear,Jeans,XXXL,0
+Clothing,Unisex,Bottomwear,Joggers,28 to 30,0
+Clothing,Unisex,Bottomwear,Joggers,32 to 34,0
+Clothing,Unisex,Bottomwear,Joggers,36 to 38,0
+Clothing,Unisex,Bottomwear,Joggers,L,1
+Clothing,Unisex,Bottomwear,Joggers,M,1
+Clothing,Unisex,Bottomwear,Joggers,S,1
+Clothing,Unisex,Bottomwear,Joggers,XL,0
+Clothing,Unisex,Bottomwear,Joggers,XS,0
+Clothing,Unisex,Bottomwear,Joggers,XXL,0
+Clothing,Unisex,Bottomwear,Lounge Pants,L,1
+Clothing,Unisex,Bottomwear,Lounge Pants,M,1
+Clothing,Unisex,Bottomwear,Lounge Pants,S,1
+Clothing,Unisex,Bottomwear,Lounge Pants,XL,0
+Clothing,Unisex,Bottomwear,Lounge Pants,XS,0
+Clothing,Unisex,Bottomwear,Lounge Pants,XXL,0
+Clothing,Unisex,Bottomwear,S24-SKIRT-COT-SOLID-WH-S,S,1
+Clothing,Unisex,Bottomwear,Shorts,26,0
+Clothing,Unisex,Bottomwear,Shorts,28,1
+Clothing,Unisex,Bottomwear,Shorts,30,1
+Clothing,Unisex,Bottomwear,Shorts,32,1
+Clothing,Unisex,Bottomwear,Shorts,34,0
+Clothing,Unisex,Bottomwear,Shorts,2XL/3XL,0
+Clothing,Unisex,Bottomwear,Shorts,2XS/XS,0
+Clothing,Unisex,Bottomwear,Shorts,L,1
+Clothing,Unisex,Bottomwear,Shorts,L-30,1
+Clothing,Unisex,Bottomwear,Shorts,L/XL,1
+Clothing,Unisex,Bottomwear,Shorts,M,1
+Clothing,Unisex,Bottomwear,Shorts,M-28,1
+Clothing,Unisex,Bottomwear,Shorts,S,1
+Clothing,Unisex,Bottomwear,Shorts,S/M,1
+Clothing,Unisex,Bottomwear,Shorts,XL,0
+Clothing,Unisex,Bottomwear,Shorts,XL-31.5,0
+Clothing,Unisex,Bottomwear,Shorts,XS,0
+Clothing,Unisex,Bottomwear,Shorts,XXL,0
+Clothing,Unisex,Bottomwear,Skirts,L,1
+Clothing,Unisex,Bottomwear,Skirts,M,1
+Clothing,Unisex,Bottomwear,Skirts,S,1
+Clothing,Unisex,Bottomwear,Skirts,XL,0
+Clothing,Unisex,Bottomwear,Skirts,XS,0
+Clothing,Unisex,Bottomwear,Track Pants,28,1
+Clothing,Unisex,Bottomwear,Track Pants,30,1
+Clothing,Unisex,Bottomwear,Track Pants,32,1
+Clothing,Unisex,Bottomwear,Track Pants,34,0
+Clothing,Unisex,Bottomwear,Track Pants,36,0
+Clothing,Unisex,Bottomwear,Track Pants,38,0
+Clothing,Unisex,Bottomwear,Track Pants,2XL/3XL,0
+Clothing,Unisex,Bottomwear,Track Pants,2XS/XS,0
+Clothing,Unisex,Bottomwear,Track Pants,L,1
+Clothing,Unisex,Bottomwear,Track Pants,L/XL,1
+Clothing,Unisex,Bottomwear,Track Pants,M,1
+Clothing,Unisex,Bottomwear,Track Pants,S,1
+Clothing,Unisex,Bottomwear,Track Pants,S/M,1
+Clothing,Unisex,Bottomwear,Track Pants,XL,0
+Clothing,Unisex,Bottomwear,Track Pants,XS,0
+Clothing,Unisex,Bottomwear,Trousers,28,1
+Clothing,Unisex,Bottomwear,Trousers,30,1
+Clothing,Unisex,Bottomwear,Trousers,32,1
+Clothing,Unisex,Bottomwear,Trousers,34,0
+Clothing,Unisex,Bottomwear,Trousers,36,0
+Clothing,Unisex,Bottomwear,Trousers,38,0
+Clothing,Unisex,Bottomwear,Trousers,L,1
+Clothing,Unisex,Bottomwear,Trousers,M,1
+Clothing,Unisex,Bottomwear,Trousers,S,1
+Clothing,Unisex,Bottomwear,Trousers,XL,0
+Clothing,Unisex,Bottomwear,Trousers,XS,0
+Clothing,Unisex,Bottomwear,Trousers,XS / White/Blue/Green,0
+Clothing,Unisex,Bottomwear,Trousers,XXL,0
+Clothing,Unisex,Indian & Festivewear,Scarves,Freesize,0
+Clothing,Unisex,Sleepwear,Sleep & Lounge,L,1
+Clothing,Unisex,Sleepwear,Sleep & Lounge,M,1
+Clothing,Unisex,Sleepwear,Sleep & Lounge,S,1
+Clothing,Unisex,Sleepwear,Sleep & Lounge,XL,0
+Clothing,Unisex,Topwear,Clothing,L,1
+Clothing,Unisex,Topwear,Clothing,M,1
+Clothing,Unisex,Topwear,Clothing,S,1
+Clothing,Unisex,Topwear,Clothing,XL,0
+Clothing,Unisex,Topwear,Clothing,XS,0
+Clothing,Unisex,Topwear,Clothing,XXL,0
+Clothing,Unisex,Topwear,Clothing,XXS,0
+Clothing,Unisex,Topwear,Clothing,XXXL,0
+Clothing,Unisex,Topwear,Coats,L,1
+Clothing,Unisex,Topwear,Coats,M,1
+Clothing,Unisex,Topwear,Coats,S,1
+Clothing,Unisex,Topwear,Coats,XL,0
+Clothing,Unisex,Topwear,Coats,XS,0
+Clothing,Unisex,Topwear,Jackets,10-12 Years,0
+Clothing,Unisex,Topwear,Jackets,2-4 Years,0
+Clothing,Unisex,Topwear,Jackets,3XL,0
+Clothing,Unisex,Topwear,Jackets,4-6 Years,0
+Clothing,Unisex,Topwear,Jackets,6-8 Years,0
+Clothing,Unisex,Topwear,Jackets,8-10 Years,0
+Clothing,Unisex,Topwear,Jackets,L,1
+Clothing,Unisex,Topwear,Jackets,M,1
+Clothing,Unisex,Topwear,Jackets,S,1
+Clothing,Unisex,Topwear,Jackets,XL,0
+Clothing,Unisex,Topwear,Jackets,XS,0
+Clothing,Unisex,Topwear,Jackets,XXL,0
+Clothing,Unisex,Topwear,Jackets,XXXL,0
+Clothing,Unisex,Topwear,Shirt,39,0
+Clothing,Unisex,Topwear,Shirt,40,0
+Clothing,Unisex,Topwear,Shirt,42,0
+Clothing,Unisex,Topwear,Shirt,44,0
+Clothing,Unisex,Topwear,Shirt,46,0
+Clothing,Unisex,Topwear,Shirts,39,0
+Clothing,Unisex,Topwear,Shirts,40,0
+Clothing,Unisex,Topwear,Shirts,41,0
+Clothing,Unisex,Topwear,Shirts,42,0
+Clothing,Unisex,Topwear,Shirts,43,0
+Clothing,Unisex,Topwear,Shirts,44,0
+Clothing,Unisex,Topwear,Shirts,46,0
+Clothing,Unisex,Topwear,Shirts,L,1
+Clothing,Unisex,Topwear,Shirts,M,1
+Clothing,Unisex,Topwear,Shirts,S,1
+Clothing,Unisex,Topwear,Shirts,XL,0
+Clothing,Unisex,Topwear,Shirts,XS,0
+Clothing,Unisex,Topwear,Shirts,XXL,0
+Clothing,Unisex,Topwear,Shirts,XXXL,0
+Clothing,Unisex,Topwear,Sweaters,2XL,0
+Clothing,Unisex,Topwear,Sweaters,L,1
+Clothing,Unisex,Topwear,Sweaters,M,1
+Clothing,Unisex,Topwear,Sweaters,S,1
+Clothing,Unisex,Topwear,Sweaters,XL,0
+Clothing,Unisex,Topwear,Sweaters,XS,0
+Clothing,Unisex,Topwear,Sweaters,XXL,0
+Clothing,Unisex,Topwear,Sweatshirts,2XL,0
+Clothing,Unisex,Topwear,Sweatshirts,3-4Y,0
+Clothing,Unisex,Topwear,Sweatshirts,4-5Y,0
+Clothing,Unisex,Topwear,Sweatshirts,5-6Y,0
+Clothing,Unisex,Topwear,Sweatshirts,6-7Y,0
+Clothing,Unisex,Topwear,Sweatshirts,L,1
+Clothing,Unisex,Topwear,Sweatshirts,M,1
+Clothing,Unisex,Topwear,Sweatshirts,S,1
+Clothing,Unisex,Topwear,Sweatshirts,XL,0
+Clothing,Unisex,Topwear,Sweatshirts,XS,0
+Clothing,Unisex,Topwear,Sweatshirts,XXL,0
+Clothing,Unisex,Topwear,Sweatshirts,XXXL,0
+Clothing,Unisex,Topwear,Tshirts,44,0
+Clothing,Unisex,Topwear,Tshirts,2XL,0
+Clothing,Unisex,Topwear,Tshirts,2XL/3XL,0
+Clothing,Unisex,Topwear,Tshirts,2XS/XS,0
+Clothing,Unisex,Topwear,Tshirts,Free Size,0
+Clothing,Unisex,Topwear,Tshirts,Freesize,0
+Clothing,Unisex,Topwear,Tshirts,L,1
+Clothing,Unisex,Topwear,Tshirts,L/XL,1
+Clothing,Unisex,Topwear,Tshirts,M,1
+Clothing,Unisex,Topwear,Tshirts,S,1
+Clothing,Unisex,Topwear,Tshirts,S/M,1
+Clothing,Unisex,Topwear,Tshirts,XL,0
+Clothing,Unisex,Topwear,Tshirts,XS,0
+Clothing,Unisex,Topwear,Tshirts,XXL,0
+Clothing,Unisex,Topwear,Tshirts,XXS,0
+Clothing,Unisex,Topwear,Tshirts,XXXL,0
+Clothing,Unisex,Topwear,Unisex Hoodies,39,0
+Clothing,Unisex,Topwear,Unisex Hoodies,40,0
+Clothing,Unisex,Topwear,Unisex Hoodies,42,0
+Clothing,Unisex,Topwear,Unisex Hoodies,44,0
+Clothing,Unisex,Topwear,Unisex Hoodies,46,0
+Clothing,Unisex,Topwear,Unisex Hoodies,2XL,0
+Clothing,Unisex,Topwear,Unisex Hoodies,3XL,0
+Clothing,Unisex,Topwear,Unisex Hoodies,L,1
+Clothing,Unisex,Topwear,Unisex Hoodies,M,1
+Clothing,Unisex,Topwear,Unisex Hoodies,Onesize,0
+Clothing,Unisex,Topwear,Unisex Hoodies,S,1
+Clothing,Unisex,Topwear,Unisex Hoodies,XL,0
+Clothing,Unisex,Topwear,Unisex Hoodies,XS,0
+Clothing,Unisex,Topwear,Unisex Hoodies,XXL,0
+Clothing,Unisex,Topwear,Unisex Hoodies,XXS,0
+Clothing,Unisex,Topwear,Unisex Hoodies,XXXL,0
+Clothing,Women,Bottomwear,Jeans,26,0
+Clothing,Women,Bottomwear,Shorts,26,0
+Clothing,Women,Bottomwear,Skirts,M,1
+Clothing,Women,Bottomwear,Trousers,M,1
+Clothing,Women,Bottomwear,Trousers,26,0
+Clothing,Women,Bottomwear,Trousers,L,1
+Clothing,Women,Bottomwear,Trousers,S,1
+Clothing,Women,Bottomwear,Skirts,S,1
+Clothing,Women,Bottomwear,Skirts,L,1
+Clothing,Women,Bottomwear,Trousers,XL,0
+Clothing,Women,Bottomwear,Lounge Pants,S,1
+Clothing,Women,Bottomwear,Lounge Pants,L,1
+Clothing,Women,Bottomwear,Trousers,28,1
+Clothing,Women,Bottomwear,Jeggings,L,1
+Clothing,Women,Bottomwear,Lounge Pants,M,1
+Clothing,Women,Bottomwear,Stockings,Free Size,0
+Clothing,Women,Bottomwear,Capris,M,1
+Clothing,Women,Bottomwear,Jeggings,M,1
+Clothing,Women,Bottomwear,Jeggings,S,1
+Clothing,Women,Bottomwear,Track Pants,L,1
+Clothing,Women,Bottomwear,Trousers,M - Tall,1
+Clothing,Women,Bottomwear,Capris,L,1
+Clothing,Women,Bottomwear,Lounge Pants,XL,0
+Clothing,Women,Bottomwear,Trousers,L - Tall,1
+Clothing,Women,Bottomwear,Trousers,XL - Tall,0
+Clothing,Women,Bottomwear,Trousers,XXL,0
+Clothing,Women,Bottomwear,Jeans,28,1
+Clothing,Women,Bottomwear,Jeans,30,1
+Clothing,Women,Bottomwear,Skirts,XL,0
+Clothing,Women,Bottomwear,Track Pants,M,1
+Clothing,Women,Bottomwear,Capris,XS,0
+Clothing,Women,Bottomwear,Jeans,34,0
+Clothing,Women,Bottomwear,Jeans,L,1
+Clothing,Women,Bottomwear,Jeans,M,1
+Clothing,Women,Bottomwear,Jeggings,XL,0
+Clothing,Women,Bottomwear,Palazzos,XS,0
+Clothing,Women,Bottomwear,Skirts,XS,0
+Clothing,Women,Bottomwear,Tights,M,1
+Clothing,Women,Bottomwear,Trousers,32,1
+Clothing,Women,Bottomwear,Trousers,S - Tall,1
+Clothing,Women,Bottomwear,Trousers,XS,0
+Clothing,Women,Bottomwear,Capris,S,1
+Clothing,Women,Bottomwear,Harem Pants,L,1
+Clothing,Women,Bottomwear,Harem Pants,S,1
+Clothing,Women,Bottomwear,Harem Pants,XL,0
+Clothing,Women,Bottomwear,Jeans,XL,0
+Clothing,Women,Bottomwear,Jeans,XXL,0
+Clothing,Women,Bottomwear,Jeggings,XS,0
+Clothing,Women,Bottomwear,Jeggings,XXL,0
+Clothing,Women,Bottomwear,Lounge Pants,XXL,0
+Clothing,Women,Bottomwear,Palazzos,L,1
+Clothing,Women,Bottomwear,Shorts,L,1
+Clothing,Women,Bottomwear,Shorts,M,1
+Clothing,Women,Bottomwear,Track Pants,S,1
+Clothing,Women,Bottomwear,Trousers,30,1
+Clothing,Women,Bottomwear,Trousers,34,0
+Clothing,Women,Bottomwear,Trousers,36,0
+Clothing,Women,Bottomwear,Trousers,XS - Tall,0
+Clothing,Women,Bottomwear,Trousers,XXL - Tall,0
+Clothing,Women,Bottomwear,Bottomwear,26,0
+Clothing,Women,Bottomwear,Bottomwear,28,1
+Clothing,Women,Bottomwear,Bottomwear,30,1
+Clothing,Women,Bottomwear,Bottomwear,32,1
+Clothing,Women,Bottomwear,Bottomwear,34,0
+Clothing,Women,Bottomwear,Bottomwear,36,0
+Clothing,Women,Bottomwear,Capris,2XL,0
+Clothing,Women,Bottomwear,Capris,XL,0
+Clothing,Women,Bottomwear,Capris,XXL,0
+Clothing,Women,Bottomwear,Cargo Trousers,26,0
+Clothing,Women,Bottomwear,Cargo Trousers,28,1
+Clothing,Women,Bottomwear,Cargo Trousers,30,1
+Clothing,Women,Bottomwear,Cargo Trousers,32,1
+Clothing,Women,Bottomwear,Cargo Trousers,34,0
+Clothing,Women,Bottomwear,Cargo Trousers,L,1
+Clothing,Women,Bottomwear,Cargo Trousers,M,1
+Clothing,Women,Bottomwear,Cargo Trousers,S,1
+Clothing,Women,Bottomwear,Cargo Trousers,XL,0
+Clothing,Women,Bottomwear,Cargo Trousers,XS,0
+Clothing,Women,Bottomwear,Harem Pants,M,1
+Clothing,Women,Bottomwear,Harem Pants,XS/S,1
+Clothing,Women,Bottomwear,Harem Pants,XXL,0
+Clothing,Women,Bottomwear,Jeans,24,0
+Clothing,Women,Bottomwear,Jeans,32,1
+Clothing,Women,Bottomwear,Jeans,36,0
+Clothing,Women,Bottomwear,Jeans,S,1
+Clothing,Women,Bottomwear,Jeans,XS,0
+Clothing,Women,Bottomwear,Joggers,26,0
+Clothing,Women,Bottomwear,Joggers,28,1
+Clothing,Women,Bottomwear,Joggers,30,1
+Clothing,Women,Bottomwear,Joggers,32,1
+Clothing,Women,Bottomwear,Joggers,34,0
+Clothing,Women,Bottomwear,Joggers,L,1
+Clothing,Women,Bottomwear,Joggers,M,1
+Clothing,Women,Bottomwear,Joggers,S,1
+Clothing,Women,Bottomwear,Joggers,XL,0
+Clothing,Women,Bottomwear,Joggers,XS,0
+Clothing,Women,Bottomwear,Joggers,XXL,0
+Clothing,Women,Bottomwear,Lounge Pants,26,0
+Clothing,Women,Bottomwear,Lounge Pants,28,1
+Clothing,Women,Bottomwear,Lounge Pants,30,1
+Clothing,Women,Bottomwear,Lounge Pants,32,1
+Clothing,Women,Bottomwear,Lounge Pants,34,0
+Clothing,Women,Bottomwear,Lounge Pants,XS,0
+Clothing,Women,Bottomwear,Lounge Pants,XXXL,0
+Clothing,Women,Bottomwear,Lounge Pants,XXXXL,0
+Clothing,Women,Bottomwear,Lounge Shorts,L,1
+Clothing,Women,Bottomwear,Lounge Shorts,M,1
+Clothing,Women,Bottomwear,Lounge Shorts,S,1
+Clothing,Women,Bottomwear,Lounge Shorts,XL,0
+Clothing,Women,Bottomwear,Palazzos,M,1
+Clothing,Women,Bottomwear,Palazzos,S,1
+Clothing,Women,Bottomwear,Palazzos,XL,0
+Clothing,Women,Bottomwear,Palazzos,XXL,0
+Clothing,Women,Bottomwear,Shorts,28,1
+Clothing,Women,Bottomwear,Shorts,30,1
+Clothing,Women,Bottomwear,Shorts,32,1
+Clothing,Women,Bottomwear,Shorts,34,0
+Clothing,Women,Bottomwear,Shorts,2XL,0
+Clothing,Women,Bottomwear,Shorts,S,1
+Clothing,Women,Bottomwear,Shorts,XL,0
+Clothing,Women,Bottomwear,Shorts,XS,0
+Clothing,Women,Bottomwear,Shorts,XXL,0
+Clothing,Women,Bottomwear,Skirts,24,0
+Clothing,Women,Bottomwear,Skirts,26,0
+Clothing,Women,Bottomwear,Skirts,28,1
+Clothing,Women,Bottomwear,Skirts,30,1
+Clothing,Women,Bottomwear,Skirts,32,1
+Clothing,Women,Bottomwear,Skirts,34,0
+Clothing,Women,Bottomwear,Skirts,36,0
+Clothing,Women,Bottomwear,Skirts,26-35,0
+Clothing,Women,Bottomwear,Skirts,2XL,0
+Clothing,Women,Bottomwear,Skirts,Onesize,0
+Clothing,Women,Bottomwear,Skirts,XXL,0
+Clothing,Women,Bottomwear,Stockings,Large,1
+Clothing,Women,Bottomwear,Tights,2XL,0
+Clothing,Women,Bottomwear,Tights,L,1
+Clothing,Women,Bottomwear,Tights,S,1
+Clothing,Women,Bottomwear,Tights,XL,0
+Clothing,Women,Bottomwear,Tights,XS,0
+Clothing,Women,Bottomwear,Track Pants,2XL,0
+Clothing,Women,Bottomwear,Track Pants,XL,0
+Clothing,Women,Bottomwear,Track Pants,XS,0
+Clothing,Women,Bottomwear,Track Pants,XS/S,1
+Clothing,Women,Bottomwear,Track Pants,XXL,0
+Clothing,Women,Bottomwear,Trousers,24,0
+Clothing,Women,Bottomwear,Trousers,30x30,0
+Clothing,Women,Bottomwear,Trousers,30x32,0
+Clothing,Women,Bottomwear,Trousers,32x30,0
+Clothing,Women,Bottomwear,Trousers,32x32,0
+Clothing,Women,Bottomwear,Trousers,34x30,0
+Clothing,Women,Bottomwear,Trousers,34x32,0
+Clothing,Women,Bottomwear,Trousers,36x30,0
+Clothing,Women,Bottomwear,Trousers,36x32,0
+Clothing,Women,Bottomwear,Trousers,L-una,1
+Clothing,Women,Bottomwear,Trousers,M-aia,1
+Clothing,Women,Bottomwear,Trousers,S-elene,1
+Clothing,Women,Bottomwear,Trousers,XL-una,0
+Clothing,Women,Bottomwear,Trousers,XXL-una,0
+Clothing,Women,Bottomwear,Trousers,XXL-una Tall,0
+Clothing,Women,Bottomwear,Trousers,XXXL,0
+Clothing,Women,Bottomwear,Trousers,XXXL - Tall,0
+Clothing,Women,Bottomwear,Trousers,XXXL-una,0
+Clothing,Women,Bottomwear,Trousers,XXXXL,0
+Clothing,Women,Bottomwear,Trousers,XXXXL - Tall,0
+Clothing,Women,Bottomwear,Trousers,XXXXL-una,0
+Clothing,Women,Indian & Festivewear,Ethnic Dresses,L,1
+Clothing,Women,Indian & Festivewear,Ethnic Dresses,M,1
+Clothing,Women,Indian & Festivewear,Ethnic Dresses,S,1
+Clothing,Women,Indian & Festivewear,Ethnic Dresses,XL,0
+Clothing,Women,Indian & Festivewear,Ethnic Dresses,XXL,0
+Clothing,Women,Indian & Festivewear,Kurtis,L,1
+Clothing,Women,Indian & Festivewear,Kurtis,M,1
+Clothing,Women,Indian & Festivewear,Kurtis,XL,0
+Clothing,Women,Indian & Festivewear,Kurtis,XXL,0
+Clothing,Women,Indian & Festivewear,Leggings,L,1
+Clothing,Women,Indian & Festivewear,Leggings,M,1
+Clothing,Women,Indian & Festivewear,Leggings,S,1
+Clothing,Women,Indian & Festivewear,Leggings,XL,0
+Clothing,Women,Indian & Festivewear,Leggings,XS,0
+Clothing,Women,Indian & Festivewear,Leggings,XS/S,1
+Clothing,Women,Indian & Festivewear,Leggings,XXL,0
+Clothing,Women,Indian & Festivewear,Leggings,XXXL,0
+Clothing,Women,Indian & Festivewear,Leggings,XXXXL,0
+Clothing,Women,Indian & Festivewear,Salwar And Dupatta,L,1
+Clothing,Women,Indian & Festivewear,Salwar And Dupatta,M,1
+Clothing,Women,Indian & Festivewear,Salwar And Dupatta,S,1
+Clothing,Women,Indian & Festivewear,Salwar And Dupatta,XL,0
+Clothing,Women,Indian & Festivewear,Salwar And Dupatta,XS,0
+Clothing,Women,Indian & Festivewear,Saree Blouse,L,1
+Clothing,Women,Indian & Festivewear,Saree Blouse,M,1
+Clothing,Women,Indian & Festivewear,Saree Blouse,S,1
+Clothing,Women,Indian & Festivewear,Saree Blouse,XL,0
+Clothing,Women,Indian & Festivewear,Saree Blouse,XXL,0
+Clothing,Women,Innerwear,Corset,XL,0
+Clothing,Women,Innerwear,Corset,XS,0
+Clothing,Women,Lingerie,Bra,2XL,0
+Clothing,Women,Lingerie,Bra,XL,0
+Clothing,Women,Lingerie,Bra,XS,0
+Clothing,Women,Lingerie,Bra,XXL,0
+Clothing,Women,Lingerie,Bra,XXXL,0
+Clothing,Women,Lingerie,Bra,XXXXL,0
+Clothing,Women,Lingerie,Breast Cups,XL,0
+Clothing,Women,Lingerie,Breast Tape,Onesize,0
+Clothing,Women,Lingerie,Breast Tape,XL,0
+Clothing,Women,Lingerie,Lingerie accessories,Onesize,0
+Clothing,Women,Lingerie,Lingerie Set,XL,0
+Clothing,Women,Lingerie,Lingerie Set,XXL,0
+Clothing,Women,Lingerie,Nipple covers,2XL,0
+Clothing,Women,Lingerie,Thong/ Panty,XL,0
+Clothing,Women,Sleepwear,Night Suits,L,1
+Clothing,Women,Sleepwear,Night Suits,M,1
+Clothing,Women,Sleepwear,Night Suits,S,1
+Clothing,Women,Sleepwear,Night Suits,XL,0
+Clothing,Women,Sleepwear,Nightdress,L,1
+Clothing,Women,Sleepwear,Nightdress,M,1
+Clothing,Women,Sleepwear,Nightdress,S,1
+Clothing,Women,Sleepwear,Nightdress,XL,0
+Clothing,Women,Sleepwear,Sleep & Lounge,L,1
+Clothing,Women,Sleepwear,Sleep & Lounge,M,1
+Clothing,Women,Sleepwear,Sleep & Lounge,S,1
+Clothing,Women,Sleepwear,Sleep & Lounge,XL,0
+Clothing,Women,Swimwear,Swimwear,2XL,0
+Clothing,Women,Swimwear,Swimwear,3XL,0
+Clothing,Women,Swimwear,Swimwear,XL,0
+Clothing,Women,Topwear,Blazers,L,1
+Clothing,Women,Topwear,Blazers,M,1
+Clothing,Women,Topwear,Blazers,S,1
+Clothing,Women,Topwear,Blazers,XL,0
+Clothing,Women,Topwear,Blazers,XS,0
+Clothing,Women,Topwear,Blazers,XXL,0
+Clothing,Women,Topwear,Bodysuit,2XL,0
+Clothing,Women,Topwear,Bodysuit,3XL,0
+Clothing,Women,Topwear,Bodysuit,L,1
+Clothing,Women,Topwear,Bodysuit,M,1
+Clothing,Women,Topwear,Bodysuit,Onesize,0
+Clothing,Women,Topwear,Bodysuit,S,1
+Clothing,Women,Topwear,Bodysuit,XL,0
+Clothing,Women,Topwear,Bodysuit,XS,0
+Clothing,Women,Topwear,Co-Ords,46,0
+Clothing,Women,Topwear,Co-Ords,2XL,0
+Clothing,Women,Topwear,Co-Ords,Free Size,0
+Clothing,Women,Topwear,Co-Ords,L,1
+Clothing,Women,Topwear,Co-Ords,M,1
+Clothing,Women,Topwear,Co-Ords,Onesize,0
+Clothing,Women,Topwear,Co-Ords,S,1
+Clothing,Women,Topwear,Co-Ords,XL,0
+Clothing,Women,Topwear,Co-Ords,XS,0
+Clothing,Women,Topwear,Co-Ords,XXL,0
+Clothing,Women,Topwear,Co-Ords,XXXL,0
+Clothing,Women,Topwear,Coats,L,1
+Clothing,Women,Topwear,Coats,M,1
+Clothing,Women,Topwear,Coats,S,1
+Clothing,Women,Topwear,Coats,XL,0
+Clothing,Women,Topwear,Coats,XS,0
+Clothing,Women,Topwear,Coats,XXL,0
+Clothing,Women,Topwear,Dresses,44,0
+Clothing,Women,Topwear,Dresses,46,0
+Clothing,Women,Topwear,Dresses,48,0
+Clothing,Women,Topwear,Dresses,2XL,0
+Clothing,Women,Topwear,Dresses,3XL,0
+Clothing,Women,Topwear,Dresses,Free,0
+Clothing,Women,Topwear,Dresses,Free Size,0
+Clothing,Women,Topwear,Dresses,L,1
+Clothing,Women,Topwear,Dresses,L / Earth Multi,1
+Clothing,Women,Topwear,Dresses,Large,1
+Clothing,Women,Topwear,Dresses,M,1
+Clothing,Women,Topwear,Dresses,M/L,1
+Clothing,Women,Topwear,Dresses,Medium,1
+Clothing,Women,Topwear,Dresses,Onesize,0
+Clothing,Women,Topwear,Dresses,S,1
+Clothing,Women,Topwear,Dresses,Small,1
+Clothing,Women,Topwear,Dresses,XL,0
+Clothing,Women,Topwear,Dresses,XL/XXL,0
+Clothing,Women,Topwear,Dresses,XS,0
+Clothing,Women,Topwear,Dresses,XS/S,1
+Clothing,Women,Topwear,Dresses,xtra large,0
+Clothing,Women,Topwear,Dresses,XXL,0
+Clothing,Women,Topwear,Dungarees,L,1
+Clothing,Women,Topwear,Dungarees,M,1
+Clothing,Women,Topwear,Dungarees,S,1
+Clothing,Women,Topwear,Dungarees,XL,0
+Clothing,Women,Topwear,Dungarees,XS,0
+Clothing,Women,Topwear,Dungarees,XXL,0
+Clothing,Women,Topwear,Jackets,2XL,0
+Clothing,Women,Topwear,Jackets,L,1
+Clothing,Women,Topwear,Jackets,M,1
+Clothing,Women,Topwear,Jackets,M/L,1
+Clothing,Women,Topwear,Jackets,S,1
+Clothing,Women,Topwear,Jackets,XL,0
+Clothing,Women,Topwear,Jackets,XL/XXL,0
+Clothing,Women,Topwear,Jackets,XS,0
+Clothing,Women,Topwear,Jackets,XS/S,1
+Clothing,Women,Topwear,Jackets,XXL,0
+Clothing,Women,Topwear,Jackets,XXXXL,0
+Clothing,Women,Topwear,Jumpsuit,26,0
+Clothing,Women,Topwear,Jumpsuit,L,1
+Clothing,Women,Topwear,Jumpsuit,M,1
+Clothing,Women,Topwear,Jumpsuit,S,1
+Clothing,Women,Topwear,Jumpsuit,XL,0
+Clothing,Women,Topwear,Jumpsuit,XS,0
+Clothing,Women,Topwear,Jumpsuit,XXL,0
+Clothing,Women,Topwear,Kurta Sets,46,0
+Clothing,Women,Topwear,Kurta Sets,L,1
+Clothing,Women,Topwear,Kurta Sets,M,1
+Clothing,Women,Topwear,Kurta Sets,S,1
+Clothing,Women,Topwear,Kurta Sets,XL,0
+Clothing,Women,Topwear,Kurta Sets,XS,0
+Clothing,Women,Topwear,Kurta Sets,XXL,0
+Clothing,Women,Topwear,Kurta Sets,XXXL,0
+Clothing,Women,Topwear,Kurtas,46,0
+Clothing,Women,Topwear,Kurtas,2XL,0
+Clothing,Women,Topwear,Kurtas,L,1
+Clothing,Women,Topwear,Kurtas,M,1
+Clothing,Women,Topwear,Kurtas,S,1
+Clothing,Women,Topwear,Kurtas,XL,0
+Clothing,Women,Topwear,Kurtas,XS,0
+Clothing,Women,Topwear,Kurtas,XXL,0
+Clothing,Women,Topwear,S24-DRES-LIN-PUFF-RED-S,S,1
+Clothing,Women,Topwear,S24-DRES-LIN-VESTDRS-BLK-M,M,1
+Clothing,Women,Topwear,Shacket,Large,1
+Clothing,Women,Topwear,Shacket,Medium,1
+Clothing,Women,Topwear,Shacket,Small,1
+Clothing,Women,Topwear,Shacket,xtra large,1
+Clothing,Women,Topwear,Shapewear,2XL3XL,0
+Clothing,Women,Topwear,Shapewear,3XL-4XL,0
+Clothing,Women,Topwear,Shapewear,4XL5XL,0
+Clothing,Women,Topwear,Shapewear,5XL-6XL,0
+Clothing,Women,Topwear,Shapewear,7XL-8XL,0
+Clothing,Women,Topwear,Shapewear,L,1
+Clothing,Women,Topwear,Shapewear,LXL,1
+Clothing,Women,Topwear,Shapewear,M,1
+Clothing,Women,Topwear,Shapewear,M-L,1
+Clothing,Women,Topwear,Shapewear,S,1
+Clothing,Women,Topwear,Shapewear,SM,1
+Clothing,Women,Topwear,Shapewear,XL,0
+Clothing,Women,Topwear,Shapewear,XL-2XL,0
+Clothing,Women,Topwear,Shapewear,XS,0
+Clothing,Women,Topwear,Shapewear,XS-S,1
+Clothing,Women,Topwear,Shapewear,XXL,0
+Clothing,Women,Topwear,Shapewear,XXXL,0
+Clothing,Women,Topwear,Shirts,46,0
+Clothing,Women,Topwear,Shirts,3XL,0
+Clothing,Women,Topwear,Shirts,4XL,0
+Clothing,Women,Topwear,Shirts,Free,0
+Clothing,Women,Topwear,Shirts,L,1
+Clothing,Women,Topwear,Shirts,M,1
+Clothing,Women,Topwear,Shirts,Onesize,0
+Clothing,Women,Topwear,Shirts,S,1
+Clothing,Women,Topwear,Shirts,XL,0
+Clothing,Women,Topwear,Shirts,XS,0
+Clothing,Women,Topwear,Shirts,XXL,0
+Clothing,Women,Topwear,Shrugs,XL,0
+Clothing,Women,Topwear,Sweaters,L,1
+Clothing,Women,Topwear,Sweaters,M,1
+Clothing,Women,Topwear,Sweaters,Onesize,0
+Clothing,Women,Topwear,Sweaters,S,1
+Clothing,Women,Topwear,Sweaters,XL,0
+Clothing,Women,Topwear,Sweaters,XS,0
+Clothing,Women,Topwear,Sweaters,XXL,0
+Clothing,Women,Topwear,Sweatshirts,2XL,0
+Clothing,Women,Topwear,Sweatshirts,L,1
+Clothing,Women,Topwear,Sweatshirts,M,1
+Clothing,Women,Topwear,Sweatshirts,M/L,1
+Clothing,Women,Topwear,Sweatshirts,S,1
+Clothing,Women,Topwear,Sweatshirts,XL,0
+Clothing,Women,Topwear,Sweatshirts,XL/XXL,0
+Clothing,Women,Topwear,Sweatshirts,XS,0
+Clothing,Women,Topwear,Sweatshirts,XS/S,1
+Clothing,Women,Topwear,Sweatshirts,XXL,0
+Clothing,Women,Topwear,Tops,44,0
+Clothing,Women,Topwear,Tops,46,0
+Clothing,Women,Topwear,Tops,2XL,0
+Clothing,Women,Topwear,Tops,2XL/3XL,0
+Clothing,Women,Topwear,Tops,2XS/XS,0
+Clothing,Women,Topwear,Tops,L,1
+Clothing,Women,Topwear,Tops,L-inus,1
+Clothing,Women,Topwear,Tops,L-una,1
+Clothing,Women,Topwear,Tops,L/XL,1
+Clothing,Women,Topwear,Tops,M,1
+Clothing,Women,Topwear,Tops,M-aia,1
+Clothing,Women,Topwear,Tops,M-ars,1
+Clothing,Women,Topwear,Tops,Onesize,0
+Clothing,Women,Topwear,Tops,S,1
+Clothing,Women,Topwear,Tops,S-elene,1
+Clothing,Women,Topwear,Tops,S-ol,1
+Clothing,Women,Topwear,Tops,S/M,1
+Clothing,Women,Topwear,Tops,XL,0
+Clothing,Women,Topwear,Tops,XL-inus,0
+Clothing,Women,Topwear,Tops,XL-una,0
+Clothing,Women,Topwear,Tops,XS,0
+Clothing,Women,Topwear,Tops,XXL,0
+Clothing,Women,Topwear,Tops,XXL-inus,0
+Clothing,Women,Topwear,Tops,XXL-una,0
+Clothing,Women,Topwear,Tops,XXS,0
+Clothing,Women,Topwear,Tops,XXXL,0
+Clothing,Women,Topwear,Tops,XXXL-una,0
+Clothing,Women,Topwear,Tops,XXXXL,0
+Clothing,Women,Topwear,Tops,XXXXL-una,0
+Clothing,Women,Topwear,Tshirts,36,0
+Clothing,Women,Topwear,Tshirts,2XL/3XL,0
+Clothing,Women,Topwear,Tshirts,2XS/XS,0
+Clothing,Women,Topwear,Tshirts,L,1
+Clothing,Women,Topwear,Tshirts,L/XL,1
+Clothing,Women,Topwear,Tshirts,M,1
+Clothing,Women,Topwear,Tshirts,M/L,1
+Clothing,Women,Topwear,Tshirts,S,1
+Clothing,Women,Topwear,Tshirts,S/M,1
+Clothing,Women,Topwear,Tshirts,XL,0
+Clothing,Women,Topwear,Tshirts,XL/XXL,0
+Clothing,Women,Topwear,Tshirts,XS,0
+Clothing,Women,Topwear,Tshirts,XS/S,1
+Clothing,Women,Topwear,Tshirts,XXL,0
+Clothing,Women,Topwear,Tshirts,XXXL,0
+Clothing,Women,Topwear,Tshirts,XXXXL,0
+Clothing,Women,Topwear,Tunics,L,1
+Clothing,Women,Topwear,Tunics,S,1
+Clothing,Women,Topwear,Tunics,XL,0
+Clothing,Women,Topwear,W23-TRCT-COT-CROP-BLK-L,L,1
+Clothing,Women,Topwear,W23-TRCT-COT-SHORT-GRY-L,L,1
+Clothing,Women,Topwear,Waistcoat,L,1
+Clothing,Women,Topwear,Waistcoat,M,1
+Clothing,Women,Topwear,Waistcoat,S,1
+Clothing,Women,Topwear,Waistcoat,XL,0
+Clothing,Women,Topwear,Waistcoat,XS,0
+Clothing,Women,Topwear,Waistcoat,XXL,0
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,2,
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,3,
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,3,
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,4,
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,4,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,4,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,4,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,4,0
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,4,
+"Luggage, Bags & Footwear",Footwear,Women,Heels,4.5,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,5,
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,5,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,5,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,5,0
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,5,
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,6,
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,6,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,6,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,6,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,6,0
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,6,
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,7,
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,7,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,7,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,7,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,7,0
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,7,
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,8,1
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,8,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,8,1
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,8,1
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,8,1
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,9,1
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,9,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,9,1
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,9,1
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,9,1
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,10,1
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,10,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,10,1
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,10,1
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,11,1
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,11,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,11,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,11,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,12,
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,12,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,12,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,12,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,35,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,35,0
+"Luggage, Bags & Footwear",Footwear,Women,Heels,35,0
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,35,
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,35,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,36,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,36,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,36,0
+"Luggage, Bags & Footwear",Footwear,Women,Heels,36,0
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,36,0
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,36,
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,36,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,37,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,37,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,37,0
+"Luggage, Bags & Footwear",Footwear,Women,Heels,37,0
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,37,0
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,37,
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,37,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,38,1
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,38,1
+"Luggage, Bags & Footwear",Footwear,Women,Flats,38,1
+"Luggage, Bags & Footwear",Footwear,Women,Heels,38,1
+"Luggage, Bags & Footwear",Footwear,Women,Loafers,38,1
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,38,1
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,38,
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,38,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,39,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,39,1
+"Luggage, Bags & Footwear",Footwear,Women,Flats,39,1
+"Luggage, Bags & Footwear",Footwear,Women,Heels,39,1
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,39,1
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,39,1
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,39,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,40,1
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,40,1
+"Luggage, Bags & Footwear",Footwear,Women,Flats,40,1
+"Luggage, Bags & Footwear",Footwear,Women,Heels,40,1
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,40,1
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,40,1
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,40,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,41,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,41,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,41,0
+"Luggage, Bags & Footwear",Footwear,Women,Heels,41,0
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,41,0
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,41,1
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,41,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,42,1
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,42,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,42,0
+"Luggage, Bags & Footwear",Footwear,Women,Heels,42,0
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,42,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,43,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,43,0
+"Luggage, Bags & Footwear",Footwear,Men,Sandals,44,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,44,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,44,0
+"Luggage, Bags & Footwear",Footwear,Men,Sandals,45,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,45,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,45,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,46,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,46,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,L,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,ED,0
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,EU36,0
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,EU37,0
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,EU38,0
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,EU39,0
+"Luggage, Bags & Footwear",Footwear,Men,Loafers,EU40,1
+"Luggage, Bags & Footwear",Footwear,Men,Sandals,EU40,1
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,EU40,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,EU40,1
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,EU40,0
+"Luggage, Bags & Footwear",Footwear,Men,Loafers,EU41,0
+"Luggage, Bags & Footwear",Footwear,Men,Sandals,EU41,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,EU41,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,EU41,0
+"Luggage, Bags & Footwear",Footwear,Women,Sandals,EU41,0
+"Luggage, Bags & Footwear",Footwear,Men,Loafers,EU42,1
+"Luggage, Bags & Footwear",Footwear,Men,Sandals,EU42,1
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,EU42,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,EU42,1
+"Luggage, Bags & Footwear",Footwear,Men,Loafers,EU43,0
+"Luggage, Bags & Footwear",Footwear,Men,Sandals,EU43,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,EU43,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,EU43,0
+"Luggage, Bags & Footwear",Footwear,Men,Loafers,EU44,0
+"Luggage, Bags & Footwear",Footwear,Men,Sandals,EU44,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,EU44,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,EU44,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,L,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,M,0
+"Luggage, Bags & Footwear",Footwear,Women,Flats,S,0
+"Luggage, Bags & Footwear",Footwear,Men,Loafers,EU45,0
+"Luggage, Bags & Footwear",Footwear,Men,Sandals,EU45,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,EU45,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,EU45,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,UK 10,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK 10,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK 10,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,UK 11,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK 11,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK 11,0
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,UK 11,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,UK 12,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK 12,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK 12,0
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,UK 12,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,UK 3,
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,UK 3,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,UK 4,
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,UK 4,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,UK 5,
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK 5,0
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,UK 5,0
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,UK 6,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK 6,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK 6,1
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,UK 6,1
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,UK 7,
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK 7,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK 7,1
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,UK 7,1
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,UK 8,1
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,UK 8,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK 8,1
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK 8,1
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,UK 8,1
+"Luggage, Bags & Footwear",Footwear,Men,Shoes,UK 9,1
+"Luggage, Bags & Footwear",Footwear,Men,Slippers,UK 9,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK 9,1
+"Luggage, Bags & Footwear",Footwear,Women,Shoes,S,1
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK 9,0
+"Luggage, Bags & Footwear",Footwear,Women,Sneakers,UK 9,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK10,1
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK10,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK11,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK11,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK4,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK5,0
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK6,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK6,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK7,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK7,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK8,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK8,1
+"Luggage, Bags & Footwear",Footwear,Men,Sneakers,UK9,0
+"Luggage, Bags & Footwear",Footwear,Unisex,Sneakers,UK9,0
