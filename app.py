@@ -292,13 +292,41 @@ def make_style_id_base(brand, aid, van, iname):
 # ─────────────────────────────────────────────────────────────────────────────
 
 @st.cache_resource
-def get_db():
+def _get_db_url():
     db_url = os.environ.get("DATABASE_URL")
     if not db_url:
         st.error("DATABASE_URL not set.")
         st.stop()
+    return db_url
+
+def get_db():
+    """
+    Returns a live psycopg2 connection. Supabase's pooler can close idle
+    connections server-side; st.cache_resource would otherwise keep handing
+    out that dead connection forever ('connection already closed'). So we
+    cache only the URL, keep the live connection in session_state, and
+    ping it before every use — reconnecting transparently if needed.
+    """
+    db_url = _get_db_url()
+
+    conn = st.session_state.get("_db_conn")
+    if conn is not None:
+        try:
+            # Cheap liveness check
+            cur = conn.cursor()
+            cur.execute("SELECT 1")
+            cur.close()
+            return conn
+        except Exception:
+            try:
+                conn.close()
+            except Exception:
+                pass
+            conn = None
+
     conn = psycopg2.connect(db_url)
     conn.autocommit = False
+    st.session_state["_db_conn"] = conn
     return conn
 
 def batch_lookup_style_keys(style_keys, conn):
