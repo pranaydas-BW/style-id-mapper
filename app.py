@@ -16,14 +16,14 @@ FINAL_KEY = {
     # ── INN: use item_name, strip last -size segment ──────────────────────────
     '7-10':'inn','AADVEKA':'inn','ACK':'inn','ANNY':'inn','ARKS':'inn',
     'Anaar':'inn','Aroop India':'inn','Averie':'inn',
-    'BAD LIES':'inn','BADFIT':'inn','BARE BROWN':'inn',
+    'BAD LIES':'inn','BADFIT':'inn',
     'Bewakoof':'inn','Bombay Troopers':'inn','Bummer':'inn',
     'CARRIALL':'inn','CLOUT JEANS':'inn','CULTURE':'inn',
     'Capsul':'inn','DEEBACO':'inn','DREAM ISLAND':'inn',
     'DaMENSCH':'inn','Daily Life Forever52':'inn','De Novoo':'inn',
     'Exhale Label':'inn','FLAWS':'inn',
     'Gully Labs':'inn','HEEL YOUR SOLE':'inn',
-    'Hamptons':'inn','House Of Mae':'inn','Huemn':'inn',
+    'Hamptons':'van','House Of Mae':'inn','Huemn':'inn',
     'Instinct First':'van','Instinct first':'van','JulietIsDead':'inn',
     'Kingdom of White':'inn','Label Ishnya':'inn','Life & Jam':'inn',
     'MAGRE':'inn','MANACA':'inn','Masha':'inn','Misnomer':'inn',
@@ -35,14 +35,14 @@ FINAL_KEY = {
     'SIHANSH':'inn','STITCH STORIES':'inn','SUBTRACT':'inn','Stitchinc':'inn',
     'Style Island':'inn','Suta':'inn','Terminal Z':'inn','Terractive':'inn',
     'The Finicky Colorist':'inn','The Mitesh':'inn','Tinkle':'inn',
-    'Urban Jungle':'inn','Urbano Fashion':'inn','VINDOF':'inn','Virgio':'van',
+    'Urban Jungle':'inn','Urbano Fashion':'inn','VINDOF':'van','Virgio':'van',
     'WAKE YOUR DREAM':'inn','WARPING THEORIES':'inn',
     'Western Era':'inn','WomanLikeU':'inn','Xaya':'inn','ZORI WORLD':'inn',
     'bare wear':'inn','hexafun':'inn','sorta':'inn',
     'ATBW':'inn','Aakar Taro':'inn','LVL99':'inn','Love Pangolin':'inn',
     # ── VAN: use vendor_article_name, strip trailing size ─────────────────────
     '63 East':'van','ARISTOBRAT':'van','Aaina Sleepwear':'van','Aldeno':'van',
-    'Aer':'van','Auburban':'van','Around The City':'van','BAWSE':'van',
+    'Auburban':'van','Around The City':'van','BAWSE':'van',
     'BLCKORCHID':'van','BOOZY BUTTON':'van','Bomaachi':'van','Broke Memers':'van',
     'By The Bay':'van','CAI':'van','Cava':'van','COMET':'van',
     'Crazy Mosquitoes':'van','Dash and Dot':'van','DenZ':'van','Dorabi':'van',
@@ -68,7 +68,7 @@ FINAL_KEY = {
     'ARUNI':'van',             # VAN has correct design+color; INN had wrong color
     'B5IVE':'van',             # VAN has correct design name; INN color=Blue for all
     'CHK':'van',               # VAN distinguishes STRIDE WHITE vs STRIDE WHITE/GREY
-    'RWDY':'van',              # VAN=AID has design+color+size; strip _size
+    'RWDY':'aid',              # VAN has copy-paste bug ("LIME YELLOW" for all colors); AID has correct color
     'Select Staples':'van',    # VAN has correct design name (Aisha/Darla/Shade)
     'Senses':'van',            # VAN has correct color; normalise unicode (Crème→Creme)
     'SilSIla':'van',           # VAN has correct design (Easy Days/Reset/Daylight)
@@ -76,6 +76,10 @@ FINAL_KEY = {
     'The Purple Sack':'van',   # VAN has unique product name (Shaamali/Shahiraa clutch)
     'Vahro':'van',             # VAN has full design name; INN node=Kingsley Stripes for all
     'World of Sisa':'van',     # VAN has unique design; INN color=White for all
+    # ── Brands fixed from error analysis round 2 (June 2026) ─────────────────
+    'FABLE STREET':'van',      # item_name brand prefix missing/color generic; VAN unique design
+    'NANA-KI':'van',           # item_name color generic ("Red"); VAN unique design name
+    'Pink Fort':'van',         # item_name color generic ("Green"); VAN unique design name
     # ── AID: use vendor_article_id, strip trailing size ───────────────────────
     'A Toddler Thing':'aid','ARISTA VAULT':'aid','BILABA':'aid','Almost Gods':'aid',
     'Bird Eye':'aid','Blissclub':'aid','Bluer':'aid','Ceya':'aid','Chapter 2':'aid',
@@ -101,6 +105,8 @@ FINAL_KEY = {
     'Private Lives':'aid',     # AID=ROUND NECK-PL009-XXL, strip -size
     'Rare Rabbit':'aid',       # AID=RR257300_2XL, strip _size
     'The Missy Co':'aid',      # AID=T357/T346/P218 (unique per design), strip -size
+    'Aer':'aid',               # AID=AERMRTGRNV018M (color+design code), VAN generic; strip size
+    'BARE BROWN':'aid',        # AID=BRBATR0072-Brown-M-34, design code is first segment
 }
 
 SIZE_ALIASES = {'2XL':'XXL','XXL':'2XL','3XL':'XXXL','XXXL':'3XL'}
@@ -247,6 +253,15 @@ def get_style_key(row):
             val = val if val != nz(aid) else strip_size(nz(aid), size)
         elif brand == 'DOG D ORIGINALS':
             val = nz(aid)
+        elif brand == 'Aer':
+            # AID: AERMRTGRNV018M (size letters appended directly after digits, no separator)
+            val = re.sub(r'(?<=\d)(XXXL|XXL|XL|XS|S|M|L)$', '', nz(aid), flags=re.IGNORECASE).strip()
+        elif brand == 'BARE BROWN':
+            # AID: BRBATR0072-Brown-M-34 — design code is the first segment before first hyphen
+            val = nz(aid).split('-')[0].strip()
+        elif brand == 'RWDY':
+            # AID: "CHILL SERIES | NAVY BLUE_L" — strip trailing _size
+            val = strip_size(aid, size)
         else:
             val = strip_size(aid, size)
     elif kt == 'van':
