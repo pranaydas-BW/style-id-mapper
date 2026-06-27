@@ -189,7 +189,45 @@ def valkyre_color(aid, iname):
     c2 = parts[-2].strip() if len(parts) >= 3 else ''
     return re.sub(r'\s+','',c2).upper()[:8] if c2 and c2.upper() not in ('NA','N/A','') else 'NA'
 
-def get_style_key(row):
+def compute_nobero_overrides(df):
+    """
+    Nobero hybrid rule: default key = VAN (strip size). But if a VAN-based
+    group exceeds 6 barcodes AND item_name actually splits that group into
+    more than 1 distinct design (i.e. item_name is MORE specific than VAN
+    for those rows), switch those rows to an item_name-based key instead.
+    If item_name is equally/less specific (e.g. a generic placeholder like
+    "Each"), VAN is kept — switching would only make things worse.
+    Returns: dict {row_index: 'inn'} for rows that should override to item_name.
+    """
+    overrides = {}
+    mask = df['brand_name'].astype(str).str.strip() == 'Nobero'
+    if not mask.any():
+        return overrides
+    sub = df[mask]
+
+    groups = {}  # (cat_key, van_val) -> list of row indices
+    for idx, row in sub.iterrows():
+        van  = nz(row.get('vendor_article_name',''))
+        size = nz(row.get('size',''))
+        cat_key = '|'.join([
+            clean(nz(row.get('division',''))),
+            clean(nz(row.get('section',''))),
+            clean(nz(row.get('department',''))),
+            clean(nz(row.get('node',''))),
+        ])
+        van_val = clean(strip_size(van, size)) if van else ''
+        groups.setdefault((cat_key, van_val), []).append(idx)
+
+    for (cat_key, van_val), idxs in groups.items():
+        if len(idxs) > 6:
+            inn_vals = {clean(inn_key(nz(df.loc[i, 'item_name']))) for i in idxs}
+            if len(inn_vals) > 1:
+                # item_name is more specific — use it for these rows
+                for i in idxs:
+                    overrides[i] = 'inn'
+    return overrides
+
+def get_style_key(row, nobero_overrides=None):
     brand = nz(row.get('brand_name',''))
     aid   = nz(row.get('vendor_article_id',''))
     van   = nz(row.get('vendor_article_name',''))
@@ -204,6 +242,13 @@ def get_style_key(row):
 
     if brand == 'VALKYRE':
         return clean(brand)+'||'+valkyre_normalize_design(van)+'||'+valkyre_color(aid,iname)+'||'+cat_key
+
+    if brand == 'Nobero':
+        # Hybrid rule: default to VAN; fall back to item_name only when
+        # item_name is genuinely more specific for an over-sized VAN group.
+        use_inn = nobero_overrides is not None and nobero_overrides.get(row.name) == 'inn'
+        val = inn_key(iname) if use_inn else (strip_size(van, size) if van else inn_key(iname))
+        return clean(brand)+'||'+clean(val)+'||'+cat_key
 
     kt = FINAL_KEY.get(brand, 'inn')
     if kt == 'aid':
@@ -417,6 +462,8 @@ def map_dataframe(df, conn, progress=None, status=None, live=None):
 
     live_update(0.05, "Step 1/4 — computing style keys…", 0, 0)
 
+    nobero_overrides = compute_nobero_overrides(df)
+
     rows_meta = []
     for _, row in df.iterrows():
         brand = nz(row.get('brand_name',''))
@@ -430,7 +477,7 @@ def map_dataframe(df, conn, progress=None, status=None, live=None):
         node  = nz(row.get('node',''))
         size_norm = re.sub(r'^(?:UK|EU)\s*','', size, flags=re.IGNORECASE).strip()
         rows_meta.append({
-            'style_key': get_style_key(row),
+            'style_key': get_style_key(row, nobero_overrides),
             'base':      make_style_id_base(brand, aid, van, iname),
             'brand':     brand,
             'size_tuple': (div, sec, dept, node, size_norm),
