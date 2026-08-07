@@ -23,33 +23,33 @@ FINAL_KEY = {
     'DaMENSCH':'inn','Daily Life Forever52':'inn','De Novoo':'inn',
     'Exhale Label':'inn','FLAWS':'inn',
     'Gully Labs':'inn','HEEL YOUR SOLE':'inn',
-    'Hamptons':'van','House Of Mae':'inn','Huemn':'inn',
+    'Hamptons':'van','House Of Mae':'inn',
     'Instinct First':'van','Instinct first':'van','JulietIsDead':'inn',
-    'Kingdom of White':'inn','Label Ishnya':'inn','Life & Jam':'inn',
+    'Label Ishnya':'inn','Life & Jam':'inn',
     'MAGRE':'inn','MANACA':'inn','Masha':'inn','Misnomer':'inn',
     'Mokobara':'inn','Nasher Miles':'inn','Nobero':'inn','Nona':'inn',
-    'No Nazar':'inn','Nude Streetwear':'inn','OFFMINT':'inn','Outerworld':'inn',
+    'No Nazar':'inn','Nude Streetwear':'inn','OFFMINT':'inn',
     'PAZZION':'inn','PINQ POLKA':'inn','PawsnCollars':'inn','PrimalGray':'inn',
     'Qua':'inn','Qunic':'inn','RIPOFF':'inn',
     'Rareism':'inn','Rising Among':'inn','Roar For Good':'inn',
-    'SIHANSH':'inn','STITCH STORIES':'inn','SUBTRACT':'inn','Stitchinc':'inn',
-    'Style Island':'inn','Suta':'inn','Terminal Z':'inn','Terractive':'inn',
+    'SIHANSH':'inn','SUBTRACT':'inn','Stitchinc':'inn',
+    'Suta':'inn','Terminal Z':'inn','Terractive':'inn',
     'The Finicky Colorist':'inn','The Mitesh':'inn','Tinkle':'inn',
     'Urban Jungle':'inn','Urbano Fashion':'inn','VINDOF':'van','Virgio':'van',
     'WAKE YOUR DREAM':'inn','WARPING THEORIES':'inn',
     'Western Era':'inn','WomanLikeU':'inn','Xaya':'inn','ZORI WORLD':'inn',
     'bare wear':'inn','hexafun':'inn','sorta':'inn',
-    'ATBW':'inn','Aakar Taro':'inn','LVL99':'inn','Love Pangolin':'inn',
+    'LVL99':'inn','Love Pangolin':'inn',
     # ── VAN: use vendor_article_name, strip trailing size ─────────────────────
-    '63 East':'van','ARISTOBRAT':'van','Aaina Sleepwear':'van','Aldeno':'van',
+    'ARISTOBRAT':'van','Aaina Sleepwear':'van','Aldeno':'van',
     'Auburban':'van','Around The City':'van','BAWSE':'van',
     'BLCKORCHID':'van','BOOZY BUTTON':'van','Bomaachi':'van','Broke Memers':'van',
     'By The Bay':'van','CAI':'van','Cava':'van','COMET':'van',
     'Crazy Mosquitoes':'van','Dash and Dot':'van','DenZ':'van','Dorabi':'van',
     'EVERDION':'van','Ewoke':'van','FLYAF':'van','FUR JADEN':'van','FYVA':'van',
     'Fearless Under Everything':'van','Femmella':'van','GOTHIC TOONS':'van',
-    'Genes Lecoanet Hemant':'van','House of Fett':'van','IWE STUDIOS':'van',
-    'Imperfecto':'van','Invogue':'van','KIU':'van','Kairo':'van','Kickers':'van',
+    'House of Fett':'van','IWE STUDIOS':'van',
+    'Imperfecto':'van','Invogue':'van','Kairo':'van','Kickers':'van',
     'LALAFLOWER':'van','Lovicide':'van','Ludic':'van','MODAU':'van','MOKY':'van',
     'Modern Crew':'van','Nap Story':'van','NautiNati':'van','Notch Above':'van',
     'PAST MODERN':'van','PRDGY':'van','Poppi':'van',
@@ -62,7 +62,7 @@ FINAL_KEY = {
     'The Pant Project':'van','The Souled Store':'van','Theater':'van',
     'Thr3letter':'van','Trendy Affair':'van','TrueBrowns':'van',
     'Tura Turi':'van','Twelve Thirty One':'van','Un Denim':'van',
-    'WOOMN':'van','Younglings':'van','Zeesh':'van','Zumee':'van','teeside':'van',
+    'WOOMN':'van','Younglings':'van','Zumee':'van','teeside':'van',
     'Khushbu Rathod Label':'van',
     # ── Brands fixed from error analysis (May 2026) ───────────────────────────
     'ARUNI':'van',             # VAN has correct design+color; INN had wrong color
@@ -80,6 +80,23 @@ FINAL_KEY = {
     'FABLE STREET':'van',      # item_name brand prefix missing/color generic; VAN unique design
     'NANA-KI':'van',           # item_name color generic ("Red"); VAN unique design name
     'Pink Fort':'van',         # item_name color generic ("Green"); VAN unique design name
+    # ── Brands fixed from error analysis round 3 (Aug 2026) ──────────────────
+    'ATBW':'van',              # VAN has product names; item_name = MONOCHROME JUNGLE for all
+    'Huemn':'van',             # item_name = description garbage; VAN has product name
+    'Kingdom of White':'van',  # VAN has design names; item_name = white-Core for everything
+    'Outerworld':'van',        # VAN has specific polo names; item_name = LUXE-Green for all
+    'STITCH STORIES':'van',    # VAN has product names; item_name = SUMMER-Blue for all
+    'Style Island':'van',      # VAN distinguishes Jane Denim vs Sussane Polka Dot (item_name doesn't)
+    'B label':'van',           # VAN correctly identifies products; item_name = Multi/Season for all
+    'Cotton Curio':'van',      # VAN has product names; AID has size embedded
+    'House of Mohini':'van',   # VAN = AID without size; item_name generic
+    'Manvi Daga':'van',        # VAN has design names; AID has color+size
+    'Meiala':'van',            # VAN has design names; item_name = Multi for all
+    'Odd Not Even':'van',      # VAN has product names; AID is raw barcode
+    'Rustlines':'van',         # VAN has design+color; item_name = Core-Black/Brown/Blue
+    'Weaving Cult':'van',      # VAN distinguishes genuinely different dress designs (RGDRS002/003)
+    'glimmr':'van',            # VAN unique per letter (bag charms)
+    'Özel':'van',              # VAN unique per bag
     # ── AID: use vendor_article_id, strip trailing size ───────────────────────
     'A Toddler Thing':'aid','ARISTA VAULT':'aid','BILABA':'aid','Almost Gods':'aid',
     'Bird Eye':'aid','Blissclub':'aid','Bluer':'aid','Ceya':'aid','Chapter 2':'aid',
@@ -107,6 +124,15 @@ FINAL_KEY = {
     'The Missy Co':'aid',      # AID=T357/T346/P218 (unique per design), strip -size
     'Aer':'aid',               # AID=AERMRTGRNV018M (color+design code), VAN generic; strip size
     'BARE BROWN':'aid',        # AID=BRBATR0072-Brown-M-34, design code is first segment
+    # ── Brands fixed from error analysis round 3 (Aug 2026), verified vs real data ──
+    'Aakar Taro':'aid',        # AID=AT-S26-S-08_BLUE_XS; strip last 2 _segments (color+size)
+    'Genes Lecoanet Hemant':'aid',  # AID=LHGW-323E02-Black-L; VAN="DRESS Black" merges distinct designs
+    'KIU':'aid',               # AID=KLMBCCBEIGE (no separator); use as-is, more precise than item_name
+    '63 East':'aid',           # AID=DT84B-Blue Stripe-FS; VAN="Blair Shirt" merges 3 colors
+    'Zeesh':'aid',             # AID=ZS-MU-BGE-001-6; VAN="BELLAGIO" merges colors
+    'Love,Viana':'aid',        # AID=BAMBOO_BROWN_S; VAN="BAMBOO TOP" etc merges color/size variants
+    'KRAUS JEANS':'aid',       # AID=LFA2356_Beige_26; VAN="HIGH RISE STRAIGHT JEANS" wrongly
+                               # merges up to 4 distinct design codes/washes under one style name
 }
 
 SIZE_ALIASES = {'2XL':'XXL','XXL':'2XL','3XL':'XXXL','XXXL':'3XL'}
@@ -307,6 +333,37 @@ def get_style_key(row, nobero_overrides=None):
         elif brand == 'RWDY':
             # AID: "CHILL SERIES | NAVY BLUE_L" — strip trailing _size
             val = strip_size(aid, size)
+        elif brand == 'Aakar Taro':
+            # AID: AT-S26-S-08_BLUE_XS → AT-S26-S-08 (strip last 2 underscore segments: color+size)
+            val = re.sub(r'(_[^_]+){2}$', '', nz(aid)).strip()
+            if val == nz(aid):
+                val = strip_size(aid, size)
+        elif brand == 'Genes Lecoanet Hemant':
+            # AID: LHGW-323E02-Black-L → LHGW-323E02-Black (strip last -segment generically;
+            # a plain strip_size fails on the one row where size="L/2XL" but AID suffix is "L/XXL")
+            val = re.sub(r'-[^-]+$', '', nz(aid)).strip()
+        elif brand == 'KIU':
+            # AID: KLMBCCBEIGE — no separators at all, color baked directly into the code.
+            # Use as-is: item_name's color field is actually LESS precise (collapses
+            # DenimBlue/MintBlue/LightBlue into one "Blue", Lilac/LightLilac into "Purple").
+            val = nz(aid)
+        elif brand == '63 East':
+            # AID: DT84B-Blue Stripe-FS → DT84B-Blue Stripe (strip last -segment generically)
+            val = re.sub(r'-[^-]+$', '', nz(aid)).strip()
+        elif brand == 'Zeesh':
+            # AID: ZS-MU-BGE-001-6 → ZS-MU-BGE-001 (strip last -segment generically)
+            val = re.sub(r'-[^-]+$', '', nz(aid)).strip()
+        elif brand == 'Love,Viana':
+            # AID: BAMBOO_BROWN_S → BAMBOO_BROWN (standard strip_size), then normalise a
+            # stray-space typo seen in source data (e.g. "IBIZA_TOP_ BLUE_M") so it doesn't
+            # split off into its own group vs "IBIZA_TOP_BLUE_S"
+            val = strip_size(aid, size)
+            val = re.sub(r'_\s+', '_', val)
+        elif brand == 'KRAUS JEANS':
+            # AID: LFA2356_Beige_26 → LFA2356 (strip last 2 underscore segments: color+size).
+            # VAN is a shared style name (e.g. "HIGH RISE STRAIGHT JEANS") reused across up to
+            # 4 distinct design codes/washes — verified against real data, do not use VAN here.
+            val = re.sub(r'(_[^_]+){2}$', '', nz(aid)).strip()
         else:
             val = strip_size(aid, size)
     elif kt == 'van':
