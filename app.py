@@ -62,7 +62,7 @@ FINAL_KEY = {
     'The Pant Project':'van','The Souled Store':'van','Theater':'van',
     'Thr3letter':'van','Trendy Affair':'van','TrueBrowns':'van',
     'Tura Turi':'van','Twelve Thirty One':'van','Un Denim':'van',
-    'WOOMN':'van','Younglings':'van','Zumee':'van','teeside':'van',
+    'WOOMN':'van','Younglings':'van','teeside':'van',
     'Khushbu Rathod Label':'van',
     # ── Brands fixed from error analysis (May 2026) ───────────────────────────
     'ARUNI':'van',             # VAN has correct design+color; INN had wrong color
@@ -133,6 +133,8 @@ FINAL_KEY = {
     'Love,Viana':'aid',        # AID=BAMBOO_BROWN_S; VAN="BAMBOO TOP" etc merges color/size variants
     'KRAUS JEANS':'aid',       # AID=LFA2356_Beige_26; VAN="HIGH RISE STRAIGHT JEANS" wrongly
                                # merges up to 4 distinct design codes/washes under one style name
+    'Zumee':'inn',             # VAN="Aurelia TOP" has no color; item_name does (Aurelia-Green vs
+                               # Aurelia-Pink) — was merging 2 colors into 1 style, verified against real data
 }
 
 SIZE_ALIASES = {'2XL':'XXL','XXL':'2XL','3XL':'XXXL','XXXL':'3XL'}
@@ -730,6 +732,30 @@ if uploaded:
         n_rows   = len(df_raw)
         n_brands = df_raw['brand_name'].nunique() if 'brand_name' in df_raw.columns else '?'
         st.write(f"**{n_rows:,} rows** · **{n_brands} brands** detected")
+
+        if 'brand_name' in df_raw.columns:
+            def _looks_corrupted(b):
+                # Heuristic: a brand name mixing CJK/Hangul/other unrelated-script
+                # characters with ordinary Latin text is a strong signal of mojibake
+                # (e.g. a UTF-8 "Ö" mis-decoded through the wrong codepage and
+                # re-encoded, landing as an unrelated CJK ideograph). A brand that's
+                # ALL CJK could be legitimate, so only flag mixed-script names.
+                s = str(b)
+                has_cjk = any('\u4e00' <= ch <= '\u9fff' or '\u3040' <= ch <= '\u30ff'
+                              or '\uac00' <= ch <= '\ud7a3' for ch in s)
+                has_latin = any(ch.isascii() and ch.isalpha() for ch in s)
+                return has_cjk and has_latin
+            suspicious = sorted(set(
+                b for b in df_raw['brand_name'].dropna().unique() if _looks_corrupted(b)))
+            if suspicious:
+                st.warning(
+                    "⚠️ Possible encoding corruption in brand_name — these values mix "
+                    "CJK/other-script characters with Latin text, which usually means a "
+                    "non-ASCII character (e.g. 'Ö', 'ï') got double-encoded/mis-decoded "
+                    "somewhere in the export pipeline before reaching this app. Rows with "
+                    "these brand names will silently fall back to the generic key logic "
+                    "and likely produce WRONG groupings until the source encoding is fixed: "
+                    + ', '.join(repr(b) for b in suspicious))
 
         with st.expander("Preview (first 5 rows)"):
             st.dataframe(df_raw.head(5), use_container_width=True)
