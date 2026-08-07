@@ -308,7 +308,8 @@ def get_style_key(row, nobero_overrides=None):
         elif brand == 'Fuaark':
             val = strip_size(aid, size)
         elif brand == 'Almost Gods':
-            val = nz(aid).split()[0].strip()
+            parts_ag = nz(aid).split()
+            val = parts_ag[0].strip() if parts_ag else strip_size(aid, size)
         elif brand == 'The Forbidden Fruit':
             val = SIZE_PAT.sub('', nz(aid)).strip().rstrip('-_ ')
         elif brand == 'OZiva':
