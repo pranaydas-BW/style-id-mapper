@@ -696,8 +696,11 @@ def flag_over10(df):
                          'sizes':','.join(sizes[:12])})
             continue
 
+        def _norm_van(v):
+            t = unicodedata.normalize('NFKD', nz(v)).encode('ascii', 'ignore').decode('ascii')
+            return re.sub(r'[^a-zA-Z0-9]', '', t).lower()
         vans  = sorted(set(clean(v) for v in grp['vendor_article_name'].dropna().unique()))
-        n_van = len(vans)
+        n_van = len(set(_norm_van(v) for v in grp['vendor_article_name'].dropna().unique()))
 
         if n_node > 1:
             flag='WRONG';   reason=f'Multiple nodes: {", ".join(nodes)}'
@@ -706,8 +709,13 @@ def flag_over10(df):
         elif brand in SOURCE_DATA_BRANDS:
             flag='DATA ISSUE'; reason='VAN encodes size/collection — source data problem'
         elif n_van == 1:
-            flag = 'GENUINE' if cnt<=20 else 'DATA ISSUE'
-            reason = f'1 VAN, {len(sizes)} sizes' if cnt<=20 else f'1 VAN, {cnt} barcodes — duplicates'
+            dup_count = int(grp['bar_code'].duplicated().sum())
+            if dup_count > 0:
+                flag = 'DATA ISSUE'
+                reason = f'1 VAN, {dup_count} duplicate barcode(s) among {cnt} rows'
+            else:
+                flag = 'GENUINE'
+                reason = f'1 VAN, {len(sizes)} sizes, {cnt} barcodes (multiple batches — all unique)'
         else:
             def clearly_diff(vlist):
                 cl = [re.sub(r'\b(size|xs|s\b|m\b|l\b|xl|2xl|3xl|each|box|packet|set)\b','',v,flags=re.I).strip() for v in vlist]
