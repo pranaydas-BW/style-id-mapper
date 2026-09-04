@@ -16,10 +16,10 @@ FINAL_KEY = {
     # ── INN: use item_name, strip last -size segment ──────────────────────────
     '7-10':'inn','AADVEKA':'inn','ACK':'inn','ANNY':'inn','ARKS':'inn',
     'Anaar':'inn','Aroop India':'inn','Averie':'inn',
-    'BAD LIES':'inn','BADFIT':'inn',
+    'BADFIT':'inn',
     'Bewakoof':'inn','Bombay Troopers':'inn','Bummer':'inn',
-    'CARRIALL':'inn','CLOUT JEANS':'inn','CULTURE':'inn',
-    'Capsul':'inn','DEEBACO':'inn','DREAM ISLAND':'inn',
+    'CARRIALL':'inn','CLOUT JEANS':'inn',
+    'Capsul':'inn','DEEBACO':'inn',
     'DaMENSCH':'inn','Daily Life Forever52':'inn','De Novoo':'inn',
     'Exhale Label':'inn','FLAWS':'inn',
     'Gully Labs':'inn','HEEL YOUR SOLE':'inn',
@@ -32,14 +32,14 @@ FINAL_KEY = {
     'PAZZION':'inn','PINQ POLKA':'inn','PawsnCollars':'inn','PrimalGray':'inn',
     'Qua':'inn','Qunic':'inn','RIPOFF':'inn',
     'Rareism':'inn','Rising Among':'inn','Roar For Good':'inn',
-    'SIHANSH':'inn','SUBTRACT':'inn','Stitchinc':'inn',
+    'SIHANSH':'inn','SUBTRACT':'inn',
     'Suta':'inn','Terminal Z':'inn','Terractive':'inn',
     'The Finicky Colorist':'inn','The Mitesh':'inn','Tinkle':'inn',
     'Urban Jungle':'inn','Urbano Fashion':'inn','VINDOF':'van','Virgio':'van',
     'WAKE YOUR DREAM':'inn','WARPING THEORIES':'inn',
     'Western Era':'inn','WomanLikeU':'inn','Xaya':'inn','ZORI WORLD':'inn',
     'bare wear':'inn','hexafun':'inn','sorta':'inn',
-    'LVL99':'inn','Love Pangolin':'inn',
+    'Love Pangolin':'inn',
     # ── VAN: use vendor_article_name, strip trailing size ─────────────────────
     'ARISTOBRAT':'van','Aaina Sleepwear':'van','Aldeno':'van',
     'Auburban':'van','Around The City':'van','BAWSE':'van',
@@ -135,6 +135,31 @@ FINAL_KEY = {
                                # merges up to 4 distinct design codes/washes under one style name
     'Zumee':'inn',             # VAN="Aurelia TOP" has no color; item_name does (Aurelia-Green vs
                                # Aurelia-Pink) — was merging 2 colors into 1 style, verified against real data
+    'EVEMEN':'van',            # item_name color field unreliable (many unrelated products say
+                               # "Black"); VAN is correct once punctuation/case noise stripped —
+                               # was merging up to 97 unrelated products into one group
+    'Iera':'van',              # item_name color field unreliable (multiple different dresses
+                               # all say "PEACH" or "Black"); VAN correctly names each design
+    'Beyond Tara':'van',       # item_name color field doesn't differentiate designs; VAN does
+    'Evrhood':'van',           # item_name color field doesn't differentiate designs; VAN does
+    'SundayLove':'van',        # item_name color field doesn't differentiate designs; VAN does
+    'Ydee':'van',              # item_name color field doesn't differentiate designs; VAN does
+    'DREAM ISLAND':'van',      # item_name color field doesn't differentiate designs; VAN does
+    'Arabellaa':'van',         # item_name color field doesn't differentiate designs; VAN does
+    'Designs by queen bee':'van',  # item_name color field doesn't differentiate designs; VAN does
+    'The Kryp':'van',          # item_name color field doesn't differentiate designs; VAN does
+    'behno New York':'van',    # item_name near-identical across designs; VAN uniquely IDs each bag
+    'TANN TRIM':'van',         # item_name near-identical across designs; VAN uniquely IDs each item
+    'Sideye':'van',            # item_name near-identical across designs; VAN uniquely IDs each bag
+    'Notice Me':'van',         # item_name near-identical across designs; VAN uniquely IDs each bag
+    'typical.':'van',          # item_name identical across 3 different t-shirt designs; VAN differs
+    'Anasi':'van',             # item_name merges different dresses/co-ords; VAN correctly differs
+    'BAD LIES':'van',          # item_name identical for STAMP vs VEGAS t-shirts; VAN correctly differs
+    'CULTURE':'van',           # item_name identical for Polo vs Raglan Tee; VAN correctly differs
+    'LVL99':'van',             # item_name suffix identical for 2 different bag designs; VAN differs
+    'Stitchinc':'van',         # item_name color repeats across different co-ord designs (both Black);
+                               # VAN differentiates design, but color must come from item_name too
+                               # since one design (The Sailor) itself has 2 colorways
 }
 
 SIZE_ALIASES = {'2XL':'XXL','XXL':'2XL','3XL':'XXXL','XXXL':'3XL'}
@@ -382,6 +407,27 @@ def get_style_key(row, nobero_overrides=None):
             val = strip_size(val, size) if val else strip_size(aid, size)
         elif brand == 'Virgio':
             val = nz(van) if van else strip_size(aid, size)
+        elif brand == 'EVEMEN':
+            # item_name's color field is unreliable (many unrelated products all say
+            # "Black"), but VAN is the real differentiator once punctuation noise is
+            # normalised (e.g. "T-shirt" vs "Tshirt" vs "T shirt" for the same design,
+            # and mixed casing like "CLUB OVERSIZED TSHIRT BLACK" vs "Club Oversized
+            # Tshirt Black"). Strip everything but letters/digits before keying.
+            v = unicodedata.normalize('NFKD', nz(van)).encode('ascii','ignore').decode('ascii')
+            val = re.sub(r'[^a-zA-Z0-9]', '', v).lower() or strip_size(aid, size)
+        elif brand == 'Anasi':
+            # VAN has a stray-space typo in some rows (e.g. "aqua topaz _dress" vs
+            # "aqua topaz_dress") that would otherwise split one design into two groups
+            v = unicodedata.normalize('NFKD', nz(van)).encode('ascii','ignore').decode('ascii')
+            val = re.sub(r'\s+_', '_', v).strip()
+        elif brand == 'Stitchinc':
+            # VAN alone isn't enough — "The Sailor..." set exists in both Black and Blue
+            # with identical VAN text. item_name's color field IS reliable per-row here;
+            # the bug was using item_name ALONE, where the same color label (e.g. "Black")
+            # is reused across different designs. Combine VAN (design) + item_name color.
+            iparts = nz(iname).split('-')
+            color = iparts[-3].strip() if len(iparts) >= 3 else ''
+            val = clean(van) + '|' + clean(color)
         else:
             val = strip_size(van,size) if van else strip_size(aid,size)
     else:  # inn
